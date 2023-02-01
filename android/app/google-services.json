@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "920304574122",
+    "project_id": "animalar-7bdad",
+    "storage_bucket": "animalar-7bdad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:920304574122:android:555f1fe6972b7fb6053ad3",
+        "android_client_info": {
+          "package_name": "com.example.animal_ar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "920304574122-g0isuq3kub6jsl05rdvd172lkv6svakg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCasWUP2bqxJ0K-2ok87sGKxjQLNdttRnM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "920304574122-g0isuq3kub6jsl05rdvd172lkv6svakg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
