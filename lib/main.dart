@@ -1,13 +1,14 @@
-import 'package:animal_ar/home_tabs.dart';
-import 'package:animal_ar/ui/home_main.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
+import 'ui/ui_home_tabs.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
