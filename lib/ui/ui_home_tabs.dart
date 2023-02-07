@@ -5,6 +5,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'ui_home_main.dart';
+import 'ui_home_nature.dart';
 
 class HomeTabs extends StatefulWidget {
   const HomeTabs({super.key});
@@ -19,7 +20,7 @@ class _HomeTabsState extends State<HomeTabs> {
   var _indexPages = 0;
 
   final pageOtions = [
-    const HomeMain(),
+    const HomeNature(),
     const ScreenOne(),
     const ScreenTwo(),
   ];
@@ -28,12 +29,12 @@ class _HomeTabsState extends State<HomeTabs> {
     return Scaffold(
       body: pageOtions[_indexPages],
       bottomNavigationBar: Container(
-        decoration: const BoxDecoration(boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 10)]),
+        decoration: const BoxDecoration(),
         child: CurvedNavigationBar(
           buttonBackgroundColor: Colors.white,
-          backgroundColor: const Color(0xff372948),
+          backgroundColor: const Color(0xffFFCACA),
           color: const Color(0xff372948),
-          animationCurve: Curves.fastOutSlowIn,
+          animationCurve: Curves.easeOutSine,
           items: <Widget>[
             Container(height: 50, width: 50, decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(30)), child: Image.asset("assets/images/banchan.png")),
             Container(height: 50, width: 50, decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(30)), child: Image.asset("assets/images/banchan.png")),
