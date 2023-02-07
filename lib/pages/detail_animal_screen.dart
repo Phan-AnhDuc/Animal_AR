@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class DetailAnimalScreen extends StatefulWidget {
   const DetailAnimalScreen({
@@ -17,7 +15,6 @@ class DetailAnimalScreen extends StatefulWidget {
 class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
   @override
   Widget build(BuildContext context) {
-    print("${widget.argument["nameAnimal"]}");
     String imageUrl = widget.argument["imageUrl"];
     String imageItems = widget.argument["imageItems"];
     String name = widget.argument["nameAnimal"];
@@ -85,7 +82,7 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
   SingleChildScrollView _buildInfoAnimal(BuildContext context, String name, String imageItems, String infoAnimal) {
     return SingleChildScrollView(
       child: Container(
-        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.37),
+        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.35),
         // height: MediaQuery.of(context).size.height ,
         width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30))),
