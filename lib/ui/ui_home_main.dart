@@ -35,9 +35,6 @@ class _HomeMainState extends State<HomeMain> {
       body: CustomScrollView(slivers: [
         _buildHeader(context),
         _buildListAnimal(context, idListSetName, idListSetInfo, idListSetImage),
-        SliverToBoxAdapter(
-          child: Container(height: 100),
-        )
       ]),
     );
   }
@@ -45,146 +42,141 @@ class _HomeMainState extends State<HomeMain> {
   SliverToBoxAdapter _buildListAnimal(BuildContext context, List idListSetName, List idListSetInfo, List idListSetImage) {
     return SliverToBoxAdapter(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Center(
-            child: Container(
-              margin: const EdgeInsets.only(top: 30),
-              color: Colors.transparent,
-              height: MediaQuery.of(context).size.height * 0.3,
-              width: MediaQuery.of(context).size.width * 0.9,
-              child: StreamBuilder(
-                stream: data.snapshots(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    const Center(child: CircularProgressIndicator(color: Colors.blue));
-                  }
-                  if (snapshot.hasData) {
-                    return ListView.builder(
-                      physics: const BouncingScrollPhysics(parent: BouncingScrollPhysics()),
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      itemCount: snapshot.data?.docs.length,
-                      itemBuilder: (context, index) {
-                        final DocumentSnapshot records = snapshot.data!.docs[index];
-                        String? name = records["nameAnimal"];
-                        String? infoAnimal = records["infoAnimal"];
-                        String? imageUrl = records["imageUrl"];
+          Container(
+            color: Colors.transparent,
+            height: MediaQuery.of(context).size.height * 0.01,
+            width: MediaQuery.of(context).size.width * 0.9,
+            child: StreamBuilder(
+              stream: data.snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  const Center(child: CircularProgressIndicator(color: Colors.blue));
+                }
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                    physics: const BouncingScrollPhysics(parent: BouncingScrollPhysics()),
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    itemCount: snapshot.data?.docs.length,
+                    itemBuilder: (context, index) {
+                      final DocumentSnapshot records = snapshot.data!.docs[index];
+                      String? name = records["nameAnimal"];
+                      String? infoAnimal = records["infoAnimal"];
+                      String? imageUrl = records["imageUrl"];
 
-                        int id = records["id"];
-                        if (id == widget.id) {
-                          WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
-                                Future.delayed(const Duration(seconds: 1), () {
-                                  idListName.add(name);
-                                  idListImage.add(imageUrl);
-                                  idListInfo.add(infoAnimal);
-                                });
-                              }));
-                        }
+                      int id = records["id"];
+                      if (id == widget.id) {
+                        WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
+                              Future.delayed(const Duration(seconds: 1), () {
+                                idListName.add(name);
+                                idListImage.add(imageUrl);
+                                idListInfo.add(infoAnimal);
+                              });
+                            }));
+                      }
 
-                        return Container();
-                        //&& idListInfo.isEmpty && idListImage.isEmpty
-                      },
-                    );
-                  }
-                  return const Center(child: CircularProgressIndicator(color: Colors.blue));
-                },
-              ),
+                      return Container();
+                      //&& idListInfo.isEmpty && idListImage.isEmpty
+                    },
+                  );
+                }
+                return const Center(child: CircularProgressIndicator(color: Colors.blue));
+              },
             ),
           ),
-          Center(
-            child: Column(
-              children: [
-                SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.8,
-                    child: GridView.builder(
-                        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: 200,
-                          childAspectRatio: 10 / 13,
-                          crossAxisSpacing: 20,
-                          mainAxisSpacing: 20,
-                        ),
-                        physics: const BouncingScrollPhysics(parent: BouncingScrollPhysics()),
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        itemCount: idListSetImage.length,
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context, MaterialPageRoute(builder: (context) => DetailAnimalScreen(imageUrl: idListSetImage[index], name: idListSetName[index], infoAnimal: idListInfo[index])));
-                            },
-                            child: Container(
-                              margin: const EdgeInsets.all(8),
-                              color: Colors.transparent,
-                              child: Column(
-                                children: [
-                                  Stack(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 50.0, right: 1),
-                                        child: Container(
-                                          height: 100,
-                                          decoration: const BoxDecoration(
-                                              borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(15),
-                                                topRight: Radius.circular(15),
-                                              ),
-                                              color: Colors.pink),
-                                        ),
-                                      ),
-                                      Padding(
-                                          padding: const EdgeInsets.only(top: 90),
-                                          child: Container(
-                                            height: 120,
-                                            decoration: BoxDecoration(
-                                                borderRadius: const BorderRadius.only(
-                                                  bottomLeft: Radius.circular(15),
-                                                  bottomRight: Radius.circular(15),
-                                                ),
-                                                boxShadow: const [BoxShadow(color: Colors.grey, blurRadius: 10)],
-                                                border: Border.all(color: Colors.white, width: 3),
-                                                color: Colors.white),
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                crossAxisAlignment: CrossAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    idListSetName[index] ?? "",
-                                                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                                    maxLines: 4,
-                                                    overflow: TextOverflow.ellipsis,
-                                                  ),
-                                                  Text(
-                                                    idListSetInfo[index] ?? "",
-                                                    maxLines: 3,
-                                                    overflow: TextOverflow.ellipsis,
-                                                    textAlign: TextAlign.justify,
-                                                    style: const TextStyle(fontSize: 10),
-                                                  ),
-                                                ],
-                                              ),
+          Column(
+            children: [
+              SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.8,
+                  child: GridView.builder(
+                      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent: 200,
+                        childAspectRatio: 10 / 13,
+                        crossAxisSpacing: 20,
+                        mainAxisSpacing: 20,
+                      ),
+                      physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      itemCount: idListSetImage.length,
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context, MaterialPageRoute(builder: (context) => DetailAnimalScreen(imageUrl: idListSetImage[index], name: idListSetName[index], infoAnimal: idListInfo[index])));
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.all(8),
+                            color: Colors.transparent,
+                            child: Column(
+                              children: [
+                                Stack(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 50.0, right: 1),
+                                      child: Container(
+                                        height: 100,
+                                        decoration: const BoxDecoration(
+                                            borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(15),
+                                              topRight: Radius.circular(15),
                                             ),
-                                          )),
-                                      Align(
-                                          alignment: Alignment.topCenter,
-                                          child: SizedBox(
-                                            height: 100,
-                                            child: Image.network(idListSetImage[index] ?? ""),
-                                          )),
-                                    ],
-                                  )
-                                  // Text(name ?? ""),
-                                  // Text(infoAnimal ?? ""),
-                                ],
-                              ),
+                                            color: Colors.pink),
+                                      ),
+                                    ),
+                                    Padding(
+                                        padding: const EdgeInsets.only(top: 90),
+                                        child: Container(
+                                          height: 120,
+                                          decoration: BoxDecoration(
+                                              borderRadius: const BorderRadius.only(
+                                                bottomLeft: Radius.circular(15),
+                                                bottomRight: Radius.circular(15),
+                                              ),
+                                              boxShadow: const [BoxShadow(color: Colors.grey, blurRadius: 10)],
+                                              border: Border.all(color: Colors.white, width: 3),
+                                              color: Colors.white),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  idListSetName[index] ?? "",
+                                                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                                  maxLines: 2,
+                                                  overflow: TextOverflow.ellipsis,
+                                                ),
+                                                Text(
+                                                  idListSetInfo[index] ?? "",
+                                                  maxLines: 4,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  textAlign: TextAlign.justify,
+                                                  style: const TextStyle(fontSize: 10),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        )),
+                                    Align(
+                                        alignment: Alignment.topCenter,
+                                        child: SizedBox(
+                                          height: 100,
+                                          child: Image.network(idListSetImage[index] ?? ""),
+                                        )),
+                                  ],
+                                )
+                                // Text(name ?? ""),
+                                // Text(infoAnimal ?? ""),
+                              ],
                             ),
-                          );
-                        })),
-              ],
-            ),
+                          ),
+                        );
+                      })),
+            ],
           )
         ],
       ),

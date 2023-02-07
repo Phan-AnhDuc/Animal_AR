@@ -1,3 +1,4 @@
+import 'package:animal_ar/const/ar_image.dart';
 import 'package:animal_ar/ui/ui_home_main.dart';
 import 'package:flutter/material.dart';
 
@@ -12,11 +13,14 @@ class _HomeNatureState extends State<HomeNature> {
   int? animalId;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xffFFCACA),
-      body: CustomScrollView(physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()), slivers: [
-        _buildListNature(context),
-      ]),
+    return Container(
+      decoration: const BoxDecoration(image: DecorationImage(image: AssetImage(OneImages.ar_background), fit: BoxFit.cover)),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: CustomScrollView(physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()), slivers: [
+          _buildListNature(context),
+        ]),
+      ),
     );
   }
 
@@ -30,7 +34,7 @@ class _HomeNatureState extends State<HomeNature> {
             child: Column(
               children: [
                 InkWell(
-                    child: Image.asset('assets/images/forest.png'),
+                    child: Image.asset(OneImages.ar_ocean),
                     onTap: () {
                       Navigator.push(
                           context,
@@ -40,7 +44,7 @@ class _HomeNatureState extends State<HomeNature> {
                                   )));
                     }),
                 InkWell(
-                    child: Image.asset('assets/images/ocean.png'),
+                    child: Image.asset(OneImages.ar_forest),
                     onTap: () {
                       Navigator.push(
                           context,
@@ -49,8 +53,9 @@ class _HomeNatureState extends State<HomeNature> {
                                     id: 2,
                                   )));
                     }),
-                InkWell(child: Image.asset('assets/images/grass.png')),
-                InkWell(child: Image.asset('assets/images/jura.png')),
+                InkWell(child: Image.asset(OneImages.ar_grass)),
+                InkWell(child: Image.asset(OneImages.ar_jura)),
+                const SizedBox(height: 30),
               ],
             ),
           ),

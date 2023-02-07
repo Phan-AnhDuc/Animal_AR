@@ -1,3 +1,4 @@
+import 'package:animal_ar/splash/splash_animal.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'ui/ui_home_tabs.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: HomeTabs(),
+      home: SplashScreen(),
     );
   }
 }

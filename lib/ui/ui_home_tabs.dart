@@ -3,8 +3,6 @@ import 'package:animal_ar/pages/screen_two.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-
-import 'ui_home_main.dart';
 import 'ui_home_nature.dart';
 
 class HomeTabs extends StatefulWidget {
@@ -31,9 +29,9 @@ class _HomeTabsState extends State<HomeTabs> {
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(),
         child: CurvedNavigationBar(
-          buttonBackgroundColor: Colors.white,
-          backgroundColor: const Color(0xffFFCACA),
-          color: const Color(0xff372948),
+          buttonBackgroundColor: Colors.transparent,
+          backgroundColor: const Color(0xffD4EDF9),
+          color: const Color(0xffA084DC),
           animationCurve: Curves.easeOutSine,
           items: <Widget>[
             Container(height: 50, width: 50, decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(30)), child: Image.asset("assets/images/banchan.png")),
