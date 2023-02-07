@@ -23,7 +23,6 @@ class _HomeMainState extends State<HomeMain> {
   List idListName = [];
   List idListInfo = [];
   List idListImage = [];
-  
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +111,8 @@ class _HomeMainState extends State<HomeMain> {
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => DetailAnimalScreen(imageUrl: idListSetImage[index], name: idListSetName[index], infoAnimal: idListInfo[index])));
+                              Navigator.push(
+                                  context, MaterialPageRoute(builder: (context) => DetailAnimalScreen(imageUrl: idListSetImage[index], name: idListSetName[index], infoAnimal: idListInfo[index])));
                             },
                             child: Container(
                               margin: const EdgeInsets.all(8),
