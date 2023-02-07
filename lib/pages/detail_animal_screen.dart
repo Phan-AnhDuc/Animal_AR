@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 class DetailAnimalScreen extends StatefulWidget {
   const DetailAnimalScreen({
     Key? key,
-    required this.argument,
+    required this.imageUrl,
+    required this.name,
+    required this.infoAnimal,
   }) : super(key: key);
 
-  final argument;
+  final imageUrl;
+  final name;
+  final infoAnimal;
 
   @override
   State<DetailAnimalScreen> createState() => _DetailAnimalScreenState();
@@ -15,10 +19,6 @@ class DetailAnimalScreen extends StatefulWidget {
 class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
   @override
   Widget build(BuildContext context) {
-    String imageUrl = widget.argument["imageUrl"];
-    String imageItems = widget.argument["imageItems"];
-    String name = widget.argument["nameAnimal"];
-    String infoAnimal = widget.argument["infoAnimal"];
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -28,8 +28,8 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
       extendBodyBehindAppBar: true,
       body: Stack(
         children: [
-          _buildImageAnimal(context, imageUrl),
-          _buildInfoAnimal(context, name, imageItems, infoAnimal),
+          _buildImageAnimal(context, widget.imageUrl),
+          _buildInfoAnimal(context, widget.name, widget.infoAnimal),
           _buildScanButton(context),
         ],
       ),
@@ -79,7 +79,7 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
     );
   }
 
-  SingleChildScrollView _buildInfoAnimal(BuildContext context, String name, String imageItems, String infoAnimal) {
+  SingleChildScrollView _buildInfoAnimal(BuildContext context, String name, String infoAnimal) {
     return SingleChildScrollView(
       child: Container(
         margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.35),
@@ -95,14 +95,14 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Image.network(imageItems),
-                Image.network(imageItems),
-                Image.network(imageItems),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //   children: [
+            //     Image.network(widget.imageItems),
+            //     Image.network(widget.imageItems),
+            //     Image.network(widget.imageItems),
+            //   ],
+            // ),
             const SizedBox(
               height: 20,
             ),

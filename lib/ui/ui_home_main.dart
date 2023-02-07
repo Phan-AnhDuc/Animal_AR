@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable, avoid_print, unrelated_type_equality_checks
+
 import 'dart:math';
 
 import 'package:animal_ar/pages/detail_animal_screen.dart';
@@ -5,7 +7,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class HomeMain extends StatefulWidget {
-  const HomeMain({super.key});
+  const HomeMain({
+    Key? key,
+    required this.id,
+  }) : super(key: key);
+
+  final id;
 
   @override
   State<HomeMain> createState() => _HomeMainState();
@@ -16,14 +23,13 @@ class _HomeMainState extends State<HomeMain> {
   List idListName = [];
   List idListInfo = [];
   List idListImage = [];
+  
 
   @override
   Widget build(BuildContext context) {
     List idListSetName = idListName.toSet().toList();
     List idListSetInfo = idListInfo.toSet().toList();
     List idListSetImage = idListImage.toSet().toList();
-    print(idListSetName);
-    print(idListSetInfo);
 
     return Scaffold(
       backgroundColor: const Color(0xffFFCACA),
@@ -67,22 +73,18 @@ class _HomeMainState extends State<HomeMain> {
                         String? imageUrl = records["imageUrl"];
 
                         int id = records["id"];
-                        print("$index---------------------$id");
-
-                        if (id == 1) {
-                          idListName.add(name);
-                          idListInfo.add(infoAnimal);
-                          idListImage.add(imageUrl);
-                        }
-                        if (idListName.isEmpty && idListInfo.isEmpty && idListImage.isEmpty) {
+                        if (id == widget.id) {
                           WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
-                                Future.delayed(const Duration(seconds: 10), () {
+                                Future.delayed(const Duration(seconds: 1), () {
                                   idListName.add(name);
                                   idListImage.add(imageUrl);
                                   idListInfo.add(infoAnimal);
                                 });
                               }));
                         }
+
+                        return Container();
+                        //&& idListInfo.isEmpty && idListImage.isEmpty
                       },
                     );
                   }
@@ -95,111 +97,92 @@ class _HomeMainState extends State<HomeMain> {
             child: Column(
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.8,
-                  child: GridView.builder(
-                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 200,
-                      childAspectRatio: 10 / 13,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 20,
-                    ),
-                    physics: const BouncingScrollPhysics(parent: BouncingScrollPhysics()),
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    itemCount: idListSetName.length,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        // onTap: () {
-                        //   Navigator.push(context, MaterialPageRoute(builder: (context) => DetailAnimalScreen(argument: records)));
-                        // },
-                        child: Container(
-                          margin: const EdgeInsets.all(8),
-                          color: Colors.transparent,
-                          child: Column(
-                            children: [
-                              Stack(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 50.0, right: 1),
-                                    child: Container(
-                                      height: 100,
-                                      decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(15),
-                                            topRight: Radius.circular(15),
-                                          ),
-                                          color: Colors.pink),
-                                    ),
-                                  ),
-                                  Padding(
-                                      padding: const EdgeInsets.only(top: 90),
-                                      child: Container(
-                                        height: 120,
-                                        decoration: BoxDecoration(
-                                            borderRadius: const BorderRadius.only(
-                                              bottomLeft: Radius.circular(15),
-                                              bottomRight: Radius.circular(15),
-                                            ),
-                                            boxShadow: const [BoxShadow(color: Colors.grey, blurRadius: 10)],
-                                            border: Border.all(color: Colors.white, width: 3),
-                                            color: Colors.white),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                idListSetName[index] ?? "",
-                                                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                                maxLines: 4,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                              Text(
-                                                idListSetInfo[index] ?? "",
-                                                maxLines: 3,
-                                                overflow: TextOverflow.ellipsis,
-                                                textAlign: TextAlign.justify,
-                                                style: const TextStyle(fontSize: 10),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      )),
-                                  Align(
-                                      alignment: Alignment.topCenter,
-                                      child: SizedBox(
-                                        height: 100,
-                                        child: Image.network(idListSetImage[index] ?? ""),
-                                      )),
-                                ],
-                              )
-                              // Text(name ?? ""),
-                              // Text(infoAnimal ?? ""),
-                            ],
-                          ),
+                    height: MediaQuery.of(context).size.height * 0.8,
+                    child: GridView.builder(
+                        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 200,
+                          childAspectRatio: 10 / 13,
+                          crossAxisSpacing: 20,
+                          mainAxisSpacing: 20,
                         ),
-                      );
-                    },
-                  ),
-                )
-                // Row(
-                //     children: idListSetName.map((i) {
-                //   return Container(
-                //     margin: const EdgeInsets.only(left: 5),
-                //     height: 20,
-                //     decoration: BoxDecoration(color: Colors.amber, borderRadius: BorderRadius.circular(5)),
-                //     child: Align(
-                //       alignment: Alignment.center,
-                //       child: Padding(
-                //         padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                //         child: Text(
-                //           i,
-                //         ),
-                //       ),
-                //     ),
-                //   );
-                // }).toList()),
+                        physics: const BouncingScrollPhysics(parent: BouncingScrollPhysics()),
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        itemCount: idListSetImage.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => DetailAnimalScreen(imageUrl: idListSetImage[index], name: idListSetName[index], infoAnimal: idListInfo[index])));
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.all(8),
+                              color: Colors.transparent,
+                              child: Column(
+                                children: [
+                                  Stack(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 50.0, right: 1),
+                                        child: Container(
+                                          height: 100,
+                                          decoration: const BoxDecoration(
+                                              borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(15),
+                                                topRight: Radius.circular(15),
+                                              ),
+                                              color: Colors.pink),
+                                        ),
+                                      ),
+                                      Padding(
+                                          padding: const EdgeInsets.only(top: 90),
+                                          child: Container(
+                                            height: 120,
+                                            decoration: BoxDecoration(
+                                                borderRadius: const BorderRadius.only(
+                                                  bottomLeft: Radius.circular(15),
+                                                  bottomRight: Radius.circular(15),
+                                                ),
+                                                boxShadow: const [BoxShadow(color: Colors.grey, blurRadius: 10)],
+                                                border: Border.all(color: Colors.white, width: 3),
+                                                color: Colors.white),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    idListSetName[index] ?? "",
+                                                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                                    maxLines: 4,
+                                                    overflow: TextOverflow.ellipsis,
+                                                  ),
+                                                  Text(
+                                                    idListSetInfo[index] ?? "",
+                                                    maxLines: 3,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    textAlign: TextAlign.justify,
+                                                    style: const TextStyle(fontSize: 10),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          )),
+                                      Align(
+                                          alignment: Alignment.topCenter,
+                                          child: SizedBox(
+                                            height: 100,
+                                            child: Image.network(idListSetImage[index] ?? ""),
+                                          )),
+                                    ],
+                                  )
+                                  // Text(name ?? ""),
+                                  // Text(infoAnimal ?? ""),
+                                ],
+                              ),
+                            ),
+                          );
+                        })),
               ],
             ),
           )

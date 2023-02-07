@@ -32,12 +32,12 @@ class _HomeNatureState extends State<HomeNature> {
                 InkWell(
                     child: Image.asset('assets/images/forest.png'),
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeMain()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeMain(id: 1,)));
                     }),
                 InkWell(
                     child: Image.asset('assets/images/ocean.png'),
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeMain()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeMain(id: 2,)));
                     }),
                 InkWell(child: Image.asset('assets/images/grass.png')),
                 InkWell(child: Image.asset('assets/images/jura.png')),
