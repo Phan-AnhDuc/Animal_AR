@@ -1,7 +1,6 @@
 import 'package:animal_ar/const/ar_color.dart';
 import 'package:animal_ar/const/ar_image.dart';
 import 'package:animal_ar/const/ar_theme.dart';
-import 'package:animal_ar/const/cache/ar_cache_image.dart';
 import 'package:animal_ar/ui/ui_home_main.dart';
 import 'package:flutter/material.dart';
 
@@ -62,7 +61,7 @@ class _HomeNatureState extends State<HomeNature> {
                 Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: InkWell(
-                      child: const CachedImage(imageUrl: OneImages.ar_forest),
+                      child: Image.asset(OneImages.ar_forest),
                       onTap: () {
                         Navigator.push(
                             context,
@@ -75,7 +74,7 @@ class _HomeNatureState extends State<HomeNature> {
                 Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: InkWell(
-                      child: const CachedImage(imageUrl: OneImages.ar_ocean),
+                      child: Image.asset(OneImages.ar_ocean),
                       onTap: () {
                         Navigator.push(
                             context,
@@ -88,7 +87,7 @@ class _HomeNatureState extends State<HomeNature> {
                 Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: InkWell(
-                      child: const CachedImage(imageUrl: OneImages.ar_grass),
+                      child: Image.asset(OneImages.ar_grass),
                       onTap: () {
                         Navigator.push(
                             context,
@@ -101,7 +100,7 @@ class _HomeNatureState extends State<HomeNature> {
                 Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: InkWell(
-                      child: const CachedImage(imageUrl: OneImages.ar_jura),
+                      child: Image.asset(OneImages.ar_jura),
                       onTap: () {
                         Navigator.push(
                             context,
@@ -134,12 +133,9 @@ class _HomeNatureState extends State<HomeNature> {
             ),
           ],
         ),
-        child: const Align(
+        child: Align(
             alignment: Alignment.topCenter,
-            child: ClipRRect(
-              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
-              child: CachedImage(imageUrl: OneImages.ar_imageLogo),
-            )),
+            child: ClipRRect(borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)), child: Image.asset(OneImages.ar_imageLogo))),
       ),
     );
   }
