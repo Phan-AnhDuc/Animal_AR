@@ -23,193 +23,152 @@ class HomeMain extends StatefulWidget {
 
 class _HomeMainState extends State<HomeMain> {
   final CollectionReference data = FirebaseFirestore.instance.collection("animalDB");
-  List idListName = [];
-  List idListInfo = [];
-  List idListImage = [];
 
   @override
   Widget build(BuildContext context) {
-    List idListSetName = idListName.toSet().toList();
-    List idListSetInfo = idListInfo.toSet().toList();
-    List idListSetImage = idListImage.toSet().toList();
-
     return Scaffold(
       backgroundColor: const Color(0xffFFCACA),
       body: CustomScrollView(slivers: [
         _buildHeader(context),
-        _buildListAnimal(context, idListSetName, idListSetInfo, idListSetImage),
+        _buildListAnimal(context),
       ]),
     );
   }
 
-  SliverToBoxAdapter _buildListAnimal(BuildContext context, List idListSetName, List idListSetInfo, List idListSetImage) {
+  SliverToBoxAdapter _buildListAnimal(BuildContext context) {
     return SliverToBoxAdapter(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-            color: Colors.transparent,
-            height: MediaQuery.of(context).size.height * 0.01,
-            width: MediaQuery.of(context).size.width * 0.9,
+        child: Column(
+      children: [
+        SizedBox(
+            height: MediaQuery.of(context).size.height * 0.8,
             child: StreamBuilder(
-              stream: data.snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  const Center(child: CircularProgressIndicator(color: Colors.blue));
-                }
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                    physics: const BouncingScrollPhysics(parent: BouncingScrollPhysics()),
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    itemCount: snapshot.data?.docs.length,
-                    itemBuilder: (context, index) {
-                      final DocumentSnapshot records = snapshot.data!.docs[index];
-                      String? name = records["nameAnimal"];
-                      String? infoAnimal = records["infoAnimal"];
-                      String? imageUrl = records["imageUrl"];
+                stream: data.snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {}
+                  if (snapshot.hasData) {
+                    return Column(
+                      children: [
+                        SizedBox(height: MediaQuery.of(context).size.height * 0.3, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "anco")),
+                        SizedBox(height: MediaQuery.of(context).size.height * 0.4, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "anthit")),
+                      ],
+                    );
+                  }
+                  return Container();
+                })),
+      ],
+    ));
+  }
 
-                      int id = records["id"];
-                      if (id == widget.id) {
-                        WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
-                              Future.delayed(const Duration(seconds: 5), () {
-                                idListName.add(name);
-                                idListImage.add(imageUrl);
-                                idListInfo.add(infoAnimal);
-                              });
-                            }));
-                      }
+  ListView _buildListView(AsyncSnapshot<QuerySnapshot<Object?>> snapshot, String idName) {
+    return ListView.builder(
+        scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+        padding: EdgeInsets.zero,
+        shrinkWrap: true,
+        itemCount: snapshot.data?.docs.length,
+        itemBuilder: (context, index) {
+          final DocumentSnapshot records = snapshot.data!.docs[index];
+          Random random = Random();
+          var indexRandom = random.nextInt(ColorRamdom.animalColor.length);
+          String idname = records["idName"];
+          int iD = records["id"];
 
-                      return Container();
-                      //&& idListInfo.isEmpty && idListImage.isEmpty
-                    },
-                  );
-                }
-                return Center(
-                    child: Lottie.asset(
-                  "assets/images/loadingAnimal.json",
-                  width: 120,
-                  height: 120,
-                ));
-              },
-            ),
-          ),
-          Column(
-            children: [
-              SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.8,
-                  child: GridView.builder(
-                      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: 200,
-                        childAspectRatio: 10 / 13,
-                        crossAxisSpacing: 20,
-                        mainAxisSpacing: 20,
-                      ),
-                      physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      itemCount: idListSetImage.length,
-                      itemBuilder: (context, index) {
-                        Random random = Random();
-                        var indexRandom = random.nextInt(ColorRamdom.animalColor.length);
-                        return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context, MaterialPageRoute(builder: (context) => DetailAnimalScreen(imageUrl: idListSetImage[index], name: idListSetName[index], infoAnimal: idListInfo[index])));
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.all(8),
-                            color: Colors.transparent,
-                            child: Column(
-                              children: [
-                                Stack(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 50.0, right: 1),
-                                      child: Container(
-                                        height: 100,
-                                        decoration: const BoxDecoration(
-                                            borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(15),
-                                              topRight: Radius.circular(15),
-                                            ),
-                                            //color: ColorRamdom.animalColor[indexRandom]),
-                                            color: OneColors.bHA),
+          return (idname == idName && iD == widget.id)
+              ? InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DetailAnimalScreen(
+                                  arguments: records,
+                                )));
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.all(8),
+                    color: Colors.transparent,
+                    child: Column(
+                      children: [
+                        Stack(
+                          children: [
+                            Container(
+                              color: OneColors.bHA,
+                              height: 100,
+                              width: MediaQuery.of(context).size.width * 0.3,
+                            ),
+                            Padding(
+                                padding: const EdgeInsets.only(top: 90),
+                                child: Container(
+                                  height: 115,
+                                  decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.only(
+                                        bottomLeft: Radius.circular(15),
+                                        bottomRight: Radius.circular(15),
                                       ),
-                                    ),
-                                    Padding(
-                                        padding: const EdgeInsets.only(top: 90),
-                                        child: Container(
-                                          height: 115,
-                                          decoration: BoxDecoration(
-                                              borderRadius: const BorderRadius.only(
-                                                bottomLeft: Radius.circular(15),
-                                                bottomRight: Radius.circular(15),
-                                              ),
-                                              boxShadow: const [BoxShadow(color: Colors.grey, blurRadius: 10)],
-                                              border: Border.all(color: Colors.white, width: 3),
-                                              color: Colors.white),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              crossAxisAlignment: CrossAxisAlignment.center,
-                                              children: [
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    color: OneColors.white,
-                                                    borderRadius: BorderRadius.circular(10),
-                                                    boxShadow: const [
-                                                      BoxShadow(
-                                                        color: Colors.grey,
-                                                        spreadRadius: 3,
-                                                        blurRadius: 20,
-                                                        offset: Offset(0, 3),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  child: Padding(
-                                                    padding: const EdgeInsets.all(4),
-                                                    child: Text(
-                                                      idListSetName[index] ?? "",
-                                                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                                      maxLines: 2,
-                                                      overflow: TextOverflow.ellipsis,
-                                                    ),
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 10),
-                                                Text(
-                                                  idListSetInfo[index] ?? "",
-                                                  maxLines: 4,
-                                                  overflow: TextOverflow.ellipsis,
-                                                  textAlign: TextAlign.justify,
-                                                  style: const TextStyle(fontSize: 10),
+                                      boxShadow: const [BoxShadow(color: Colors.grey, blurRadius: 10)],
+                                      border: Border.all(color: Colors.white, width: 3),
+                                      color: Colors.white),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: SizedBox(
+                                      height: 300,
+                                      width: MediaQuery.of(context).size.width * 0.3,
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            width: MediaQuery.of(context).size.width * 0.3,
+                                            decoration: BoxDecoration(
+                                              color: OneColors.white,
+                                              borderRadius: BorderRadius.circular(10),
+                                              boxShadow: const [
+                                                BoxShadow(
+                                                  color: Colors.grey,
+                                                  spreadRadius: 3,
+                                                  blurRadius: 20,
+                                                  offset: Offset(0, 3),
                                                 ),
                                               ],
                                             ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(4),
+                                              child: Text(
+                                                records["nameAnimal"] ?? "",
+                                                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ),
                                           ),
-                                        )),
-                                    Align(
-                                        alignment: Alignment.topCenter,
-                                        child: SizedBox(
-                                          height: 100,
-                                          child: Image.network(idListSetImage[index] ?? ""),
-                                        )),
-                                  ],
-                                )
-                                // Text(name ?? ""),
-                                // Text(infoAnimal ?? ""),
-                              ],
-                            ),
-                          ),
-                        );
-                      })),
-            ],
-          )
-        ],
-      ),
-    );
+                                          const SizedBox(height: 10),
+                                          Text(
+                                            records["infoAnimal"] ?? "",
+                                            maxLines: 4,
+                                            overflow: TextOverflow.ellipsis,
+                                            textAlign: TextAlign.justify,
+                                            style: const TextStyle(fontSize: 10),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                )),
+                            Align(
+                                alignment: Alignment.topCenter,
+                                child: SizedBox(
+                                  height: 100,
+                                  child: Image.network(records["imageUrl"] ?? ""),
+                                )),
+                          ],
+                        )
+                        // Text(name ?? ""),
+                        // Text(infoAnimal ?? ""),
+                      ],
+                    ),
+                  ),
+                )
+              : const SizedBox();
+        });
   }
 
   SliverPersistentHeader _buildHeader(BuildContext context) {
