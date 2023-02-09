@@ -64,6 +64,7 @@ class OneColors {
   static const Color infoLight = Color(0xFFDDF3FF);
   static const Color warningLight = Color(0xFFFDF1D3);
   static const Color badge = Color(0xFFF14666);
+  // ignore: constant_identifier_names
   static const Color warning_internet = Color(0xFFFFAFAF);
   //Border Colors
   static const Color shadow = Color(0xFF4C4B5E);

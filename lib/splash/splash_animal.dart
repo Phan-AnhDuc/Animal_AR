@@ -37,15 +37,16 @@ class _SplashScreenState extends State<SplashScreen> {
               body: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  SizedBox(width: MediaQuery.of(context).size.width * 0.6, child: Image.asset(OneImages.ar_logo)),
                   SizedBox(
-                    height: 150,
-                    width: 150,
+                    height: 120,
+                    width: 120,
                     child: Lottie.asset(
-                      "assets/images/lodingAnimal.json",
+                      "assets/images/loadingAnimal.json",
                       onLoaded: (p0) {
                         Future.delayed(const Duration(seconds: 5), (() {
                           setState(() {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeTabs()));
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeTabs()));
                           });
                         }));
                       },
@@ -54,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           padding: const EdgeInsets.symmetric(horizontal: 30),
                           child: Text(
                             "Không có kết nối Internet\nVui lòng kiểm tra lại kết nối mạng!",
-                            style: OneTheme.of(context).title1.copyWith(color: OneColors.white),
+                            style: OneTheme.of(context).title1.copyWith(color: OneColors.textOrange),
                             maxLines: 2,
                             textAlign: TextAlign.center,
                           ),

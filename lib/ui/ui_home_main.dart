@@ -1,10 +1,13 @@
-// ignore_for_file: unused_local_variable, avoid_print, unrelated_type_equality_checks
+// ignore_for_file: unused_local_variable, avoid_print, unrelated_type_equality_checks, prefer_typing_uninitialized_variables
 
 import 'dart:math';
 
+import 'package:animal_ar/const/ar_color.dart';
+import 'package:animal_ar/const/ar_list_color.dart';
 import 'package:animal_ar/pages/detail_animal_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class HomeMain extends StatefulWidget {
   const HomeMain({
@@ -69,7 +72,7 @@ class _HomeMainState extends State<HomeMain> {
                       int id = records["id"];
                       if (id == widget.id) {
                         WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
-                              Future.delayed(const Duration(seconds: 1), () {
+                              Future.delayed(const Duration(seconds: 5), () {
                                 idListName.add(name);
                                 idListImage.add(imageUrl);
                                 idListInfo.add(infoAnimal);
@@ -82,7 +85,12 @@ class _HomeMainState extends State<HomeMain> {
                     },
                   );
                 }
-                return const Center(child: CircularProgressIndicator(color: Colors.blue));
+                return Center(
+                    child: Lottie.asset(
+                  "assets/images/loadingAnimal.json",
+                  width: 120,
+                  height: 120,
+                ));
               },
             ),
           ),
@@ -102,6 +110,8 @@ class _HomeMainState extends State<HomeMain> {
                       shrinkWrap: true,
                       itemCount: idListSetImage.length,
                       itemBuilder: (context, index) {
+                        Random random = Random();
+                        var indexRandom = random.nextInt(ColorRamdom.animalColor.length);
                         return InkWell(
                           onTap: () {
                             Navigator.push(
@@ -123,13 +133,14 @@ class _HomeMainState extends State<HomeMain> {
                                               topLeft: Radius.circular(15),
                                               topRight: Radius.circular(15),
                                             ),
-                                            color: Colors.pink),
+                                            //color: ColorRamdom.animalColor[indexRandom]),
+                                            color: OneColors.bHA),
                                       ),
                                     ),
                                     Padding(
                                         padding: const EdgeInsets.only(top: 90),
                                         child: Container(
-                                          height: 120,
+                                          height: 115,
                                           decoration: BoxDecoration(
                                               borderRadius: const BorderRadius.only(
                                                 bottomLeft: Radius.circular(15),
@@ -144,12 +155,30 @@ class _HomeMainState extends State<HomeMain> {
                                               mainAxisAlignment: MainAxisAlignment.center,
                                               crossAxisAlignment: CrossAxisAlignment.center,
                                               children: [
-                                                Text(
-                                                  idListSetName[index] ?? "",
-                                                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                                  maxLines: 2,
-                                                  overflow: TextOverflow.ellipsis,
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    color: OneColors.white,
+                                                    borderRadius: BorderRadius.circular(10),
+                                                    boxShadow: const [
+                                                      BoxShadow(
+                                                        color: Colors.grey,
+                                                        spreadRadius: 3,
+                                                        blurRadius: 20,
+                                                        offset: Offset(0, 3),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.all(4),
+                                                    child: Text(
+                                                      idListSetName[index] ?? "",
+                                                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                                      maxLines: 2,
+                                                      overflow: TextOverflow.ellipsis,
+                                                    ),
+                                                  ),
                                                 ),
+                                                const SizedBox(height: 10),
                                                 Text(
                                                   idListSetInfo[index] ?? "",
                                                   maxLines: 4,
@@ -288,7 +317,7 @@ class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   double get maxExtent => max(maxHeight, minHeight);
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return new SizedBox.expand(child: child);
+    return SizedBox.expand(child: child);
   }
 
   @override

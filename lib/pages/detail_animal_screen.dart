@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 
 class DetailAnimalScreen extends StatefulWidget {
@@ -111,7 +113,6 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
               child: Text(
                 infoAnimal,
                 style: const TextStyle(fontSize: 20),
-                maxLines: 8,
                 textAlign: TextAlign.justify,
               ),
             ),
