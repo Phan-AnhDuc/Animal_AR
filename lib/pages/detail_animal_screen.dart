@@ -5,14 +5,10 @@ import 'package:flutter/material.dart';
 class DetailAnimalScreen extends StatefulWidget {
   const DetailAnimalScreen({
     Key? key,
-    required this.imageUrl,
-    required this.name,
-    required this.infoAnimal,
+    required this.arguments,
   }) : super(key: key);
 
-  final imageUrl;
-  final name;
-  final infoAnimal;
+  final arguments;
 
   @override
   State<DetailAnimalScreen> createState() => _DetailAnimalScreenState();
@@ -30,8 +26,8 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
       extendBodyBehindAppBar: true,
       body: Stack(
         children: [
-          _buildImageAnimal(context, widget.imageUrl),
-          _buildInfoAnimal(context, widget.name, widget.infoAnimal),
+          _buildImageAnimal(context, widget.arguments),
+          _buildInfoAnimal(context, widget.arguments),
           _buildScanButton(context),
         ],
       ),
@@ -81,7 +77,7 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
     );
   }
 
-  SingleChildScrollView _buildInfoAnimal(BuildContext context, String name, String infoAnimal) {
+  SingleChildScrollView _buildInfoAnimal(BuildContext context, var arguments) {
     return SingleChildScrollView(
       child: Container(
         margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.35),
@@ -93,7 +89,7 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
             Padding(
               padding: const EdgeInsets.only(top: 20.0, bottom: 20),
               child: Text(
-                name,
+                arguments["nameAnimal"],
                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
               ),
             ),
@@ -111,7 +107,7 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(
-                infoAnimal,
+                arguments["infoAnimal"],
                 style: const TextStyle(fontSize: 20),
                 textAlign: TextAlign.justify,
               ),
@@ -125,13 +121,13 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
     );
   }
 
-  Container _buildImageAnimal(BuildContext context, String imageUrl) {
+  Container _buildImageAnimal(BuildContext context, var arguments) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.5,
       color: const Color(0xffFFB783),
       child: Center(
         child: Image.network(
-          imageUrl,
+          arguments["imageUrl"],
           scale: 0.5,
         ),
       ),
