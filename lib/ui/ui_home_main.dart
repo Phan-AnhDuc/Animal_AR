@@ -4,10 +4,12 @@ import 'dart:math';
 
 import 'package:animal_ar/const/ar_color.dart';
 import 'package:animal_ar/const/ar_list_color.dart';
+
+import 'package:animal_ar/const/cache/ar_cache_image.dart';
 import 'package:animal_ar/pages/detail_animal_screen.dart';
+import 'package:animal_ar/search/ui_search.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 
 class HomeMain extends StatefulWidget {
   const HomeMain({
@@ -28,14 +30,21 @@ class _HomeMainState extends State<HomeMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffFFCACA),
-      body: CustomScrollView(slivers: [
-        _buildHeader(context),
-        _buildListAnimal(context),
-      ]),
+      body: Scrollbar(
+        child: CustomScrollView(
+            physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics(),
+            ),
+            slivers: [
+              _buildHeader(context),
+              _buildListAnimal(context, widget.id),
+            ]),
+      ),
     );
   }
 
-  SliverToBoxAdapter _buildListAnimal(BuildContext context) {
+  SliverToBoxAdapter _buildListAnimal(BuildContext context, int id) {
+    Random random = Random();
     return SliverToBoxAdapter(
         child: Column(
       children: [
@@ -46,11 +55,44 @@ class _HomeMainState extends State<HomeMain> {
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {}
                   if (snapshot.hasData) {
-                    return Column(
-                      children: [
-                        SizedBox(height: MediaQuery.of(context).size.height * 0.3, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "anco")),
-                        SizedBox(height: MediaQuery.of(context).size.height * 0.4, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "anthit")),
-                      ],
+                    return SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          id == 1
+                              ? Column(
+                                  children: [
+                                    SizedBox(height: MediaQuery.of(context).size.height * 0.35, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "anco")),
+                                    SizedBox(height: MediaQuery.of(context).size.height * 0.35, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "anthit")),
+                                  ],
+                                )
+                              : const SizedBox(),
+                          id == 2
+                              ? Column(
+                                  children: [
+                                    SizedBox(height: MediaQuery.of(context).size.height * 0.4, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "anco")),
+                                    SizedBox(height: MediaQuery.of(context).size.height * 0.4, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "anthit")),
+                                  ],
+                                )
+                              : const SizedBox(),
+                          id == 3
+                              ? Column(
+                                  children: [
+                                    SizedBox(height: MediaQuery.of(context).size.height * 0.4, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "giasuc")),
+                                    SizedBox(height: MediaQuery.of(context).size.height * 0.4, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "giacam")),
+                                    SizedBox(height: MediaQuery.of(context).size.height * 0.4, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "giacam")),
+                                  ],
+                                )
+                              : const SizedBox(),
+                          id == 4
+                              ? Column(
+                                  children: [
+                                    SizedBox(height: MediaQuery.of(context).size.height * 0.4, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "anco")),
+                                    SizedBox(height: MediaQuery.of(context).size.height * 0.4, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "anthit")),
+                                  ],
+                                )
+                              : const SizedBox(),
+                        ],
+                      ),
                     );
                   }
                   return Container();
@@ -89,11 +131,15 @@ class _HomeMainState extends State<HomeMain> {
                     child: Column(
                       children: [
                         Stack(
+                          alignment: Alignment.topCenter,
                           children: [
                             Container(
-                              color: OneColors.bHA,
                               height: 100,
-                              width: MediaQuery.of(context).size.width * 0.3,
+                              width: MediaQuery.of(context).size.width * 0.36,
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+                                color: ColorRamdom.animalColor[indexRandom],
+                              ),
                             ),
                             Padding(
                                 padding: const EdgeInsets.only(top: 90),
@@ -130,13 +176,15 @@ class _HomeMainState extends State<HomeMain> {
                                                 ),
                                               ],
                                             ),
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(4),
-                                              child: Text(
-                                                records["nameAnimal"] ?? "",
-                                                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
+                                            child: Center(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(4),
+                                                child: Text(
+                                                  records["nameAnimal"] ?? "",
+                                                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                                  maxLines: 2,
+                                                  overflow: TextOverflow.ellipsis,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -157,7 +205,7 @@ class _HomeMainState extends State<HomeMain> {
                                 alignment: Alignment.topCenter,
                                 child: SizedBox(
                                   height: 100,
-                                  child: Image.network(records["imageUrl"] ?? ""),
+                                  child: CachedImage(imageUrl: records["imageUrl"]),
                                 )),
                           ],
                         )
@@ -177,79 +225,31 @@ class _HomeMainState extends State<HomeMain> {
       floating: false,
       delegate: SliverAppBarDelegate(
         child: Padding(
-          padding: const EdgeInsets.only(top: 40.0, left: 20, right: 24),
+          padding: const EdgeInsets.only(top: 20.0, left: 10, right: 10),
           child: Row(
             children: [
               Expanded(
                 flex: 1,
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Icon(
-                          Icons.arrow_back_ios_new,
-                          color: Colors.white,
-                          size: 30,
-                        ),
+                    children: const [
+                      Icon(
+                        Icons.arrow_back_ios_new,
+                        color: Colors.white,
+                        size: 35,
                       ),
-                      const SizedBox(width: 10),
+                      SizedBox(width: 10),
                     ],
                   ),
                 ),
               ),
-              Expanded(
-                flex: 4,
-                child: SizedBox(
-                  height: 50,
-                  child: TextFormField(
-                    style: const TextStyle(
-                      fontSize: 24,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    decoration: InputDecoration(
-                      focusColor: Colors.white,
-                      //add prefix icon
-                      prefixIcon: const Icon(
-                        Icons.search,
-                        color: Colors.white,
-                      ),
-
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white, width: 1.0),
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      fillColor: Colors.white,
-
-                      hintText: "Search",
-
-                      //make hint text
-                      hintStyle: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontFamily: "verdana_regular",
-                        fontWeight: FontWeight.w400,
-                      ),
-
-                      //lable style
-                      labelStyle: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 16,
-                        fontFamily: "verdana_regular",
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                ),
+              const Expanded(
+                flex: 6,
+                child: SearchBar(), // SizedBox(
               )
             ],
           ),

@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Stack(
       children: [
         Container(
-          decoration: const BoxDecoration(image: DecorationImage(image: AssetImage(OneImages.ar_splash))),
+          decoration: const BoxDecoration(image: DecorationImage(image: AssetImage(OneImages.ar_splash), fit: BoxFit.cover)),
           child: Scaffold(
               backgroundColor: Colors.transparent,
               body: Column(

@@ -22,6 +22,7 @@ class _HomeNatureState extends State<HomeNature> {
         body: CustomScrollView(physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()), slivers: [
           _buildHead(context),
           _buildListNature(context),
+          _buildComingSoon(context),
         ]),
       ),
     );
@@ -136,6 +137,47 @@ class _HomeNatureState extends State<HomeNature> {
         child: Align(
             alignment: Alignment.topCenter,
             child: ClipRRect(borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)), child: Image.asset(OneImages.ar_imageLogo))),
+      ),
+    );
+  }
+
+  SliverToBoxAdapter _buildComingSoon(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Container(
+        margin: const EdgeInsets.only(top: 40),
+        color: Colors.transparent,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: OneColors.bHA,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.white,
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    // offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(6.0),
+                child: Text(
+                  'Coming soon',
+                  style: OneTheme.of(context).body1.copyWith(color: OneColors.white, fontSize: 18),
+                ),
+              ),
+            ),
+            const SizedBox(height: 30),
+            Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: Image.asset(OneImages.ar_ice),
+            ),
+            const SizedBox(height: 30),
+          ],
+        ),
       ),
     );
   }
