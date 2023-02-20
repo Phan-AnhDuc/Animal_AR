@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:animal_ar/const/ar_color.dart';
 import 'package:animal_ar/const/ar_list_color.dart';
+import 'package:animal_ar/const/ar_theme.dart';
 
 import 'package:animal_ar/const/cache/ar_cache_image.dart';
 import 'package:animal_ar/pages/detail_animal_screen.dart';
@@ -49,7 +50,7 @@ class _HomeMainState extends State<HomeMain> {
         child: Column(
       children: [
         SizedBox(
-            height: MediaQuery.of(context).size.height * 0.8,
+            height: MediaQuery.of(context).size.height * 0.9,
             child: StreamBuilder(
                 stream: data.snapshots(),
                 builder: (context, snapshot) {
@@ -61,7 +62,10 @@ class _HomeMainState extends State<HomeMain> {
                           id == 1
                               ? Column(
                                   children: [
+                                    _buildNoidung('Động vật ăn cỏ'),
                                     SizedBox(height: MediaQuery.of(context).size.height * 0.35, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "anco")),
+                                    const SizedBox(height: 20),
+                                    _buildNoidung('Động vật ăn thịt'),
                                     SizedBox(height: MediaQuery.of(context).size.height * 0.35, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "anthit")),
                                   ],
                                 )
@@ -69,16 +73,21 @@ class _HomeMainState extends State<HomeMain> {
                           id == 2
                               ? Column(
                                   children: [
-                                    SizedBox(height: MediaQuery.of(context).size.height * 0.4, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "anco")),
-                                    SizedBox(height: MediaQuery.of(context).size.height * 0.4, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "anthit")),
+                                    _buildNoidung('Động vật sống ở nước mặn'),
+                                    SizedBox(height: MediaQuery.of(context).size.height * 0.4, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "nuocman")),
+                                    //const SizedBox(height: 10),
+                                    _buildNoidung('Động vật sống ở nước ngọt'),
+                                    SizedBox(height: MediaQuery.of(context).size.height * 0.4, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "nuocngot")),
                                   ],
                                 )
                               : const SizedBox(),
                           id == 3
                               ? Column(
                                   children: [
+                                    _buildNoidung('Gia súc'),
                                     SizedBox(height: MediaQuery.of(context).size.height * 0.4, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "giasuc")),
-                                    SizedBox(height: MediaQuery.of(context).size.height * 0.4, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "giacam")),
+                                    // const SizedBox(height: 10),
+                                    _buildNoidung('Gia cầm'),
                                     SizedBox(height: MediaQuery.of(context).size.height * 0.4, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "giacam")),
                                   ],
                                 )
@@ -86,7 +95,10 @@ class _HomeMainState extends State<HomeMain> {
                           id == 4
                               ? Column(
                                   children: [
+                                    _buildNoidung('Động vật ăn cỏ'),
                                     SizedBox(height: MediaQuery.of(context).size.height * 0.4, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "anco")),
+                                    const SizedBox(height: 10),
+                                    _buildNoidung('Động vật ăn cỏ'),
                                     SizedBox(height: MediaQuery.of(context).size.height * 0.4, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "anthit")),
                                   ],
                                 )
@@ -114,7 +126,6 @@ class _HomeMainState extends State<HomeMain> {
           var indexRandom = random.nextInt(ColorRamdom.animalColor.length);
           String idname = records["idName"];
           int iD = records["id"];
-
           return (idname == idName && iD == widget.id)
               ? InkWell(
                   onTap: () {
@@ -123,6 +134,7 @@ class _HomeMainState extends State<HomeMain> {
                         MaterialPageRoute(
                             builder: (context) => DetailAnimalScreen(
                                   arguments: records,
+                                  colors: ColorRamdom.animalColor[indexRandom],
                                 )));
                   },
                   child: Container(
@@ -169,10 +181,10 @@ class _HomeMainState extends State<HomeMain> {
                                               borderRadius: BorderRadius.circular(10),
                                               boxShadow: const [
                                                 BoxShadow(
-                                                  color: Colors.grey,
-                                                  spreadRadius: 3,
-                                                  blurRadius: 20,
-                                                  offset: Offset(0, 3),
+                                                  color: Color.fromARGB(255, 205, 205, 205),
+                                                  spreadRadius: 1,
+                                                  blurRadius: 1,
+                                                  offset: Offset(0, 2),
                                                 ),
                                               ],
                                             ),
@@ -217,6 +229,30 @@ class _HomeMainState extends State<HomeMain> {
                 )
               : const SizedBox();
         });
+  }
+
+  Container _buildNoidung(String title) {
+    return Container(
+      decoration: BoxDecoration(
+        color: OneColors.white,
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: const [
+          BoxShadow(
+            color: Color.fromARGB(255, 212, 207, 207),
+            spreadRadius: 1,
+            blurRadius: 1,
+            // offset: Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 6, bottom: 6, left: 10, right: 10),
+        child: Text(
+          title,
+          style: OneTheme.of(context).body1.copyWith(color: OneColors.black, fontSize: 15),
+        ),
+      ),
+    );
   }
 
   SliverPersistentHeader _buildHeader(BuildContext context) {

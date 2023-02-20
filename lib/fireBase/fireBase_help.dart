@@ -9,7 +9,6 @@ Future<List<Map<String, dynamic>>> getTipsData() async {
   for (var element in snapshot.docs) {
     var mapData = element.data() as Map<String, dynamic>;
     dataList.add(mapData);
-    print(mapData);
   }
   return dataList;
 }

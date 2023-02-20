@@ -1,17 +1,16 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
+import 'package:animal_ar/const/ar_card.dart';
 import 'package:animal_ar/const/ar_color.dart';
 import 'package:animal_ar/const/ar_theme.dart';
 import 'package:animal_ar/const/cache/ar_cache_image.dart';
 import 'package:flutter/material.dart';
 
 class DetailAnimalScreen extends StatefulWidget {
-  const DetailAnimalScreen({
-    Key? key,
-    required this.arguments,
-  }) : super(key: key);
+  const DetailAnimalScreen({Key? key, required this.arguments, required this.colors}) : super(key: key);
 
   final arguments;
+  final Color colors;
 
   @override
   State<DetailAnimalScreen> createState() => _DetailAnimalScreenState();
@@ -27,15 +26,12 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: const IconThemeData(
-          color: Colors.white,
-          size: 40,
-        ),
+        iconTheme: const IconThemeData(color: Colors.white, size: 35),
       ),
       extendBodyBehindAppBar: true,
       body: Stack(
         children: [
-          _buildImageAnimal(context, widget.arguments),
+          _buildImageAnimal(context, widget.arguments, widget.colors),
           _buildInfoAnimal(context, widget.arguments, plkh),
           _buildScanButton(context),
         ],
@@ -101,27 +97,33 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
     return SingleChildScrollView(
       child: Container(
         margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.5),
-        // height: MediaQuery.of(context).size.height ,
         width: MediaQuery.of(context).size.width,
-        decoration: const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30))),
+        decoration: BoxDecoration(
+            border: Border.all(color: OneColors.black, width: 0.3),
+            gradient: const LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color.fromARGB(255, 255, 255, 255),
+                Color.fromARGB(255, 246, 217, 184),
+                Color.fromARGB(255, 247, 190, 190),
+              ],
+            ),
+            borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30))),
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 20.0, bottom: 10),
+              padding: const EdgeInsets.only(top: 20.0),
               child: Text(
                 arguments["nameAnimal"],
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
+                style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 35),
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.only(bottom: 10),
               child: Text(
-                arguments["infoAnimal"],
-                style: const TextStyle(fontSize: 18),
-                textAlign: TextAlign.justify,
+                "( ${arguments["nameAnimalEnglish"]} )",
+                style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Color.fromARGB(255, 148, 149, 152)),
               ),
             ),
             const SizedBox(
@@ -131,8 +133,8 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
               children: [
                 Row(
                   children: [
-                    _buildPlkh(Icons.history_toggle_off, 'Giới'),
-                    _buildPlkh(Icons.history_edu_outlined, 'Bộ'),
+                    _buildPlkh('Giới'),
+                    _buildPlkh('Bộ'),
                   ],
                 ),
                 const SizedBox(height: 5),
@@ -142,11 +144,11 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
                     _buildInfoPlkh(bo),
                   ],
                 ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 20),
                 Row(
                   children: [
-                    _buildPlkh(Icons.manage_history_outlined, 'Ngành'),
-                    _buildPlkh(Icons.work_history_outlined, 'Lớp'),
+                    _buildPlkh('Ngành'),
+                    _buildPlkh('Lớp'),
                   ],
                 ),
                 const SizedBox(height: 5),
@@ -158,9 +160,20 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 150,
+            const SizedBox(height: 30),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: OneColors.black, width: 1)),
+                child: Text(
+                  arguments["infoAnimal"],
+                  style: const TextStyle(fontSize: 16),
+                  textAlign: TextAlign.justify,
+                ),
+              ),
             ),
+            const SizedBox(height: 150),
           ],
         ),
       ),
@@ -174,10 +187,13 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            decoration: BoxDecoration(color: Colors.transparent, borderRadius: BorderRadius.circular(10), border: Border.all(color: OneColors.black, width: 2)),
+            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: OneColors.black, width: 1)),
             child: Padding(
               padding: const EdgeInsets.all(5.0),
-              child: Text(nganh),
+              child: Text(
+                nganh,
+                style: OneTheme.of(context).body1.copyWith(color: OneColors.black, fontSize: 15),
+              ),
             ),
           ),
         ],
@@ -186,7 +202,6 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
   }
 
   Expanded _buildPlkh(
-    IconData icon,
     String title,
   ) {
     return Expanded(
@@ -194,21 +209,19 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, color: OneColors.black),
-          const SizedBox(width: 5),
           Text(
             title,
-            style: OneTheme.of(context).body1.copyWith(color: OneColors.black, fontSize: 15),
+            style: OneTheme.of(context).body2.copyWith(color: OneColors.black, fontSize: 15),
           ),
         ],
       ),
     );
   }
 
-  Container _buildImageAnimal(BuildContext context, var arguments) {
+  Container _buildImageAnimal(BuildContext context, var arguments, Color colors) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.6,
-      color: const Color(0xffFFB783),
+      color: colors,
       child: Padding(
         padding: const EdgeInsets.only(bottom: 50),
         child: Center(

@@ -8,14 +8,14 @@ import 'package:animal_ar/fireBase/fireBase_help.dart';
 import 'package:animal_ar/ui/ui_home_main.dart';
 import 'package:flutter/material.dart';
 
-class ScreenOne extends StatefulWidget {
-  const ScreenOne({super.key});
+class ScreenTips extends StatefulWidget {
+  const ScreenTips({super.key});
 
   @override
-  State<ScreenOne> createState() => _ScreenOneState();
+  State<ScreenTips> createState() => _ScreenTipsState();
 }
 
-class _ScreenOneState extends State<ScreenOne> {
+class _ScreenTipsState extends State<ScreenTips> {
   List<Map<String, dynamic>> _tipsDataList = [];
   @override
   void initState() {
@@ -44,6 +44,10 @@ class _ScreenOneState extends State<ScreenOne> {
                       borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
                       boxShadow: [BoxShadow(offset: const Offset(0, 1), color: OneColors.textGreyDark.withOpacity(0.1), blurRadius: 15, spreadRadius: 1)]),
                   child: AppBar(
+                    leading: const Icon(
+                      Icons.search_rounded,
+                      color: OneColors.yellow,
+                    ),
                     title: const Text('Có thể bạn chưa biết'),
                     backgroundColor: Colors.transparent,
                     shadowColor: Colors.transparent,
@@ -60,6 +64,7 @@ class _ScreenOneState extends State<ScreenOne> {
 
   Widget _buildCardAnimal(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ListView.builder(
           physics: const BouncingScrollPhysics(),
@@ -71,7 +76,7 @@ class _ScreenOneState extends State<ScreenOne> {
             var indexRandom = random.nextInt(ColorRamdom.animalColor.length);
             return OneCard(
               color: ColorRamdom.animalColor[indexRandom],
-              borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(20.0),
               child: Container(
                 padding: const EdgeInsets.all(10),
                 height: 110,

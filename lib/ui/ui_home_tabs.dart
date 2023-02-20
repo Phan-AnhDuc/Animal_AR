@@ -1,4 +1,4 @@
-import 'package:animal_ar/pages/screen_one.dart';
+import 'package:animal_ar/pages/screen_tips.dart';
 import 'package:animal_ar/pages/screen_two.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -19,8 +19,8 @@ class _HomeTabsState extends State<HomeTabs> {
 
   final pageOtions = [
     const HomeNature(),
-    const ScreenOne(),
-    const ScreenTwo(),
+    const ScreenTips(),
+    const ScreenKnown(),
   ];
   @override
   Widget build(BuildContext context) {
