@@ -16,7 +16,7 @@ class HistoryText {
 }
 
 List<HistoryText> history = [
-  HistoryText(year: 'Sự Kiện', event: 'Thời điểm'),
+  // HistoryText(year: 'Sự Kiện', event: 'Thời điểm'),
   HistoryText(year: '3500 triệu năm trước', event: 'Sinh vật nhân sơ'),
   HistoryText(year: '3000 triệu năm trước', event: 'Sinh vật quang hợp'),
   HistoryText(year: '2000 triệu năm trước', event: '	Sinh vật nhân chuẩn'),

@@ -5,6 +5,7 @@ import 'package:animal_ar/const/ar_color.dart';
 import 'package:animal_ar/const/ar_theme.dart';
 import 'package:animal_ar/const/cache/ar_cache_image.dart';
 import 'package:flutter/material.dart';
+import 'package:timelines/timelines.dart';
 
 class DetailAnimalScreen extends StatefulWidget {
   const DetailAnimalScreen({Key? key, required this.arguments, required this.colors}) : super(key: key);
@@ -170,6 +171,23 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
                   arguments["infoAnimal"],
                   style: const TextStyle(fontSize: 16),
                   textAlign: TextAlign.justify,
+                ),
+              ),
+            ),
+            // const Padding(
+            //   padding: EdgeInsets.only(top: 8.0),
+            //   child: Text(
+            //     'Có thể bạn quan tâm',
+            //     style: TextStyle(fontSize: 20, color: OneColors.black),
+            //   ),
+            // ),
+            const Padding(
+              padding: EdgeInsets.only(top: 10.0),
+              child: Text(
+                'Có thể bạn quan tâm',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.black,
                 ),
               ),
             ),

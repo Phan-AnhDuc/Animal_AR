@@ -4,6 +4,7 @@ import 'package:animal_ar/const/ar_image.dart';
 import 'package:animal_ar/const/ar_text.dart';
 import 'package:animal_ar/const/ar_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:timelines/timelines.dart';
 
 class ScreenKnown extends StatefulWidget {
   const ScreenKnown({super.key});
@@ -82,72 +83,10 @@ class _ScreenKnownState extends State<ScreenKnown> {
             const SizedBox(height: 5),
             OneCard(
               borderRadius: BorderRadius.circular(10),
-              child: Container(
-                  padding: const EdgeInsets.all(12),
-                  child: ListView.builder(
-                    itemCount: history.length,
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return Row(
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Column(
-                              children: [
-                                Container(
-                                    width: MediaQuery.of(context).size.width - 44,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.grey),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Expanded(
-                                          flex: 1,
-                                          child: Center(
-                                            child: Text(
-                                              history[index].year,
-                                              style: OneTheme.of(context).body1.copyWith(color: OneColors.black),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    )),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: Column(
-                              children: [
-                                Container(
-                                    width: MediaQuery.of(context).size.width - 44,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.grey),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Expanded(
-                                          flex: 1,
-                                          child: Center(
-                                            child: Text(
-                                              history[index].event,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    )),
-                              ],
-                            ),
-                          ),
-                        ],
-                      );
-                    },
-                  )),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8.0, bottom: 8),
+                child: _buildTimeline(),
+              ),
             ),
             OneCard(
               borderRadius: BorderRadius.circular(10),
@@ -158,6 +97,29 @@ class _ScreenKnownState extends State<ScreenKnown> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Timeline _buildTimeline() {
+    return Timeline.tileBuilder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      builder: TimelineTileBuilder.fromStyle(
+        contentsAlign: ContentsAlign.alternating,
+        contentsBuilder: (context, index) => Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              Text(
+                history[index].year,
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+              ),
+              Text(history[index].event),
+            ],
+          ),
+        ),
+        itemCount: history.length,
       ),
     );
   }

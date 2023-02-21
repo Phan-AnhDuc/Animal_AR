@@ -1,5 +1,6 @@
 import 'package:animal_ar/pages/screen_tips.dart';
 import 'package:animal_ar/pages/screen_two.dart';
+import 'package:animal_ar/ui/ui_new_main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class _HomeTabsState extends State<HomeTabs> {
   final pageOtions = [
     const HomeNature(),
     const ScreenTips(),
-    const ScreenKnown(),
+    const ScreenNews(),
   ];
   @override
   Widget build(BuildContext context) {

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:animal_ar/const/ar_card.dart';
 import 'package:animal_ar/const/ar_color.dart';
+import 'package:animal_ar/const/ar_image.dart';
 import 'package:animal_ar/const/ar_list_color.dart';
 import 'package:animal_ar/const/cache/ar_cache_image.dart';
 import 'package:animal_ar/fireBase/fireBase_help.dart';
@@ -40,15 +41,17 @@ class _ScreenTipsState extends State<ScreenTips> {
               child: Container(
                   padding: const EdgeInsets.only(top: 0, bottom: 20, left: 0, right: 0),
                   decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 210, 92, 216),
+                      image: const DecorationImage(image: AssetImage(OneImages.ar_background), fit: BoxFit.cover),
                       borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
                       boxShadow: [BoxShadow(offset: const Offset(0, 1), color: OneColors.textGreyDark.withOpacity(0.1), blurRadius: 15, spreadRadius: 1)]),
                   child: AppBar(
-                    leading: const Icon(
-                      Icons.search_rounded,
-                      color: OneColors.yellow,
+                    title: const Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Có thể bạn chưa biết',
+                        style: TextStyle(color: OneColors.textRed, fontWeight: FontWeight.bold),
+                      ),
                     ),
-                    title: const Text('Có thể bạn chưa biết'),
                     backgroundColor: Colors.transparent,
                     shadowColor: Colors.transparent,
                   )),
@@ -98,7 +101,7 @@ class _ScreenTipsState extends State<ScreenTips> {
                         maxLines: 4,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.justify,
-                        style: const TextStyle(fontSize: 13),
+                        style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
