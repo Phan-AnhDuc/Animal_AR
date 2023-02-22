@@ -1,14 +1,14 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
-import 'package:animal_ar/const/ar_card.dart';
 import 'package:animal_ar/const/ar_color.dart';
 import 'package:animal_ar/const/ar_theme.dart';
 import 'package:animal_ar/const/cache/ar_cache_image.dart';
 import 'package:flutter/material.dart';
-import 'package:timelines/timelines.dart';
 
 class DetailAnimalScreen extends StatefulWidget {
-  const DetailAnimalScreen({Key? key, required this.arguments, required this.colors}) : super(key: key);
+  const DetailAnimalScreen(
+      {Key? key, required this.arguments, required this.colors})
+      : super(key: key);
 
   final arguments;
   final Color colors;
@@ -67,7 +67,8 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
             child: Container(
               height: 80,
               width: 80,
-              decoration: const BoxDecoration(color: Color(0xffFF577F), shape: BoxShape.circle),
+              decoration: const BoxDecoration(
+                  color: Color(0xffFF577F), shape: BoxShape.circle),
               child: Image.asset(
                 "assets/images/banchan.png",
                 scale: 0.6,
@@ -89,7 +90,8 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
     );
   }
 
-  SingleChildScrollView _buildInfoAnimal(BuildContext context, var arguments, var plkh) {
+  SingleChildScrollView _buildInfoAnimal(
+      BuildContext context, var arguments, var plkh) {
     String gioi = plkh["Giới"];
     String bo = plkh["Bộ"];
     String lop = plkh["Lớp"];
@@ -110,21 +112,26 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
                 Color.fromARGB(255, 247, 190, 190),
               ],
             ),
-            borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30))),
+            borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(30), topRight: Radius.circular(30))),
         child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 20.0),
               child: Text(
                 arguments["nameAnimal"],
-                style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 35),
+                style:
+                    const TextStyle(fontWeight: FontWeight.w700, fontSize: 35),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 10),
               child: Text(
                 "( ${arguments["nameAnimalEnglish"]} )",
-                style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Color.fromARGB(255, 148, 149, 152)),
+                style: const TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 20,
+                    color: Color.fromARGB(255, 148, 149, 152)),
               ),
             ),
             const SizedBox(
@@ -166,7 +173,10 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
               padding: const EdgeInsets.all(12.0),
               child: Container(
                 padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: OneColors.black, width: 1)),
+                decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.6),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: OneColors.black, width: 1)),
                 child: Text(
                   arguments["infoAnimal"],
                   style: const TextStyle(fontSize: 16),
@@ -174,21 +184,14 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
                 ),
               ),
             ),
-            // const Padding(
-            //   padding: EdgeInsets.only(top: 8.0),
-            //   child: Text(
-            //     'Có thể bạn quan tâm',
-            //     style: TextStyle(fontSize: 20, color: OneColors.black),
-            //   ),
-            // ),
             const Padding(
               padding: EdgeInsets.only(top: 10.0),
               child: Text(
                 'Có thể bạn quan tâm',
                 style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.black,
-                ),
+                    fontSize: 20.0,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold),
               ),
             ),
             const SizedBox(height: 150),
@@ -205,12 +208,17 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: OneColors.black, width: 1)),
+            decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.6),
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: OneColors.black, width: 1)),
             child: Padding(
               padding: const EdgeInsets.all(5.0),
               child: Text(
                 nganh,
-                style: OneTheme.of(context).body1.copyWith(color: OneColors.black, fontSize: 15),
+                style: OneTheme.of(context)
+                    .body1
+                    .copyWith(color: OneColors.black, fontSize: 15),
               ),
             ),
           ),
@@ -229,14 +237,17 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
         children: [
           Text(
             title,
-            style: OneTheme.of(context).body2.copyWith(color: OneColors.black, fontSize: 15),
+            style: OneTheme.of(context)
+                .body2
+                .copyWith(color: OneColors.black, fontSize: 15),
           ),
         ],
       ),
     );
   }
 
-  Container _buildImageAnimal(BuildContext context, var arguments, Color colors) {
+  Container _buildImageAnimal(
+      BuildContext context, var arguments, Color colors) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.6,
       color: colors,

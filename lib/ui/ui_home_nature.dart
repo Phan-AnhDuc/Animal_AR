@@ -1,8 +1,10 @@
+import 'package:animal_ar/const/ar_card.dart';
 import 'package:animal_ar/const/ar_color.dart';
 import 'package:animal_ar/const/ar_image.dart';
 import 'package:animal_ar/const/ar_theme.dart';
 import 'package:animal_ar/ui/ui_home_main.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeNature extends StatefulWidget {
   const HomeNature({super.key});
@@ -16,15 +18,20 @@ class _HomeNatureState extends State<HomeNature> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(image: DecorationImage(image: AssetImage(OneImages.ar_background), fit: BoxFit.cover)),
+      decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(OneImages.ar_background), fit: BoxFit.cover)),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: CustomScrollView(physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()), slivers: [
-          _buildHeadInfo(context),
-          _buildHead(context),
-          _buildListNature(context),
-          //_buildComingSoon(context),
-        ]),
+        body: CustomScrollView(
+            physics: const BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics()),
+            slivers: [
+              _buildHeadInfo(context),
+              _buildHead(context),
+              _buildListNature(context),
+              //_buildComingSoon(context),
+            ]),
       ),
     );
   }
@@ -45,7 +52,10 @@ class _HomeNatureState extends State<HomeNature> {
                     alignment: Alignment.topLeft,
                     child: Text(
                       'Các dạng thiên nhiên khác',
-                      style: OneTheme.of(context).body2.copyWith(color: OneColors.black, fontSize: 17),
+                      style: GoogleFonts.aBeeZee(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
                   ),
                 ),
@@ -113,7 +123,7 @@ class _HomeNatureState extends State<HomeNature> {
   SliverToBoxAdapter _buildHead(BuildContext context) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.only(left: 20.0, right: 20),
         child: Column(
           children: [
             Align(
@@ -122,7 +132,10 @@ class _HomeNatureState extends State<HomeNature> {
                 padding: const EdgeInsets.only(left: 10.0),
                 child: Text(
                   'Dạng thiên nhiên nổi bật',
-                  style: OneTheme.of(context).body2.copyWith(color: OneColors.black, fontSize: 17),
+                  style: GoogleFonts.aBeeZee(
+                    fontSize: 16,
+                    fontWeight: FontWeight.normal,
+                  ),
                 ),
               ),
             ),
@@ -136,19 +149,51 @@ class _HomeNatureState extends State<HomeNature> {
                               id: 1,
                             )));
               },
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                decoration: const BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      spreadRadius: 1,
-                      blurRadius: 15,
-                      // offset: Offset(0, 3),
+              child: Stack(
+                children: [
+                  Container(
+                    decoration: const BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          spreadRadius: 1,
+                          blurRadius: 15,
+                          // offset: Offset(0, 3),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                child: ClipRRect(borderRadius: BorderRadius.circular(25), child: Image.asset(OneImages.ar_imageLogo)),
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Image.asset(OneImages.ar_imageLogo)),
+                  ),
+                  SizedBox(
+                    height: 250,
+                    width: 250,
+                    child: Image.asset(OneImages.ar_tiger_kid),
+                  ),
+                  Positioned(
+                    top: 160,
+                    left: 215,
+                    child: OneCard(
+                      borderRadius: BorderRadius.circular(25),
+                      padding: const EdgeInsets.all(8),
+                      child: Row(
+                        children: const [
+                          Text(
+                            'Tìm hiểu thêm',
+                            style: TextStyle(
+                                fontSize: 10, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(width: 5),
+                          Icon(
+                            Icons.navigate_next,
+                            size: 12,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
@@ -162,17 +207,35 @@ class _HomeNatureState extends State<HomeNature> {
       child: Align(
         alignment: Alignment.topLeft,
         child: Padding(
-          padding: const EdgeInsets.only(top: 50.0, left: 20, bottom: 30),
+          padding: const EdgeInsets.only(top: 10.0, left: 15, bottom: 30),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Welcome to',
-                style: OneTheme.of(context).body1.copyWith(color: OneColors.black, fontSize: 30),
+              // Text(
+              //   'Animal Kids',
+              //   style: GoogleFonts.montserrat(
+              //     fontSize: 30,
+              //     fontWeight: FontWeight.bold,
+              //   ),
+              // ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.16,
+                    child: Image.asset(OneImages.ar_logo)),
               ),
-              Text(
-                'Animal Kids',
-                style: OneTheme.of(context).body1.copyWith(color: OneColors.black, fontSize: 30),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15.0),
+                  child: Text(
+                    'Chào mừng bạn đã đến',
+                    style: GoogleFonts.montserrat(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
@@ -180,45 +243,4 @@ class _HomeNatureState extends State<HomeNature> {
       ),
     );
   }
-
-  // SliverToBoxAdapter _buildComingSoon(BuildContext context) {
-  //   return SliverToBoxAdapter(
-  //     child: Container(
-  //       margin: const EdgeInsets.only(top: 40),
-  //       color: Colors.transparent,
-  //       child: Column(
-  //         mainAxisAlignment: MainAxisAlignment.start,
-  //         children: [
-  //           Container(
-  //             decoration: BoxDecoration(
-  //               color: OneColors.bHA,
-  //               borderRadius: BorderRadius.circular(10),
-  //               boxShadow: const [
-  //                 BoxShadow(
-  //                   color: Colors.white,
-  //                   spreadRadius: 5,
-  //                   blurRadius: 7,
-  //                   // offset: Offset(0, 3),
-  //                 ),
-  //               ],
-  //             ),
-  //             child: Padding(
-  //               padding: const EdgeInsets.all(6.0),
-  //               child: Text(
-  //                 'Coming soon',
-  //                 style: OneTheme.of(context).body1.copyWith(color: OneColors.white, fontSize: 18),
-  //               ),
-  //             ),
-  //           ),
-  //           const SizedBox(height: 30),
-  //           Padding(
-  //             padding: const EdgeInsets.only(right: 20),
-  //             child: Image.asset(OneImages.ar_ice),
-  //           ),
-  //           const SizedBox(height: 30),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 }
