@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:animal_ar/const/ar_color.dart';
+import 'package:animal_ar/const/ar_image.dart';
 import 'package:animal_ar/const/ar_theme.dart';
 import 'package:animal_ar/const/cache/ar_cache_image.dart';
 import 'package:flutter/material.dart';
@@ -103,15 +104,18 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             border: Border.all(color: OneColors.black, width: 0.3),
-            gradient: const LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color.fromARGB(255, 255, 255, 255),
-                Color.fromARGB(255, 246, 217, 184),
-                Color.fromARGB(255, 247, 190, 190),
-              ],
-            ),
+            // gradient: const LinearGradient(
+            //   begin: Alignment.topLeft,
+            //   end: Alignment.bottomRight,
+            //   colors: [
+            //     Color(0xffDFFFD8),
+            //     Color.fromARGB(255, 255, 255, 255),
+            //     Color.fromARGB(255, 246, 217, 184),
+            //     Color.fromARGB(255, 247, 190, 190),
+            //   ],
+            // ),
+            image: const DecorationImage(
+                image: AssetImage(OneImages.ar_background), fit: BoxFit.cover),
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(30), topRight: Radius.circular(30))),
         child: Column(
@@ -250,12 +254,20 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
       BuildContext context, var arguments, Color colors) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.6,
-      color: colors,
+      // color: colors,
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage(OneImages.ar_background), fit: BoxFit.cover),
+      ),
       child: Padding(
         padding: const EdgeInsets.only(bottom: 50),
         child: Center(
-            child: CachedImage(
-          imageUrl: arguments["imageUrl"],
+            child: SizedBox(
+          width: 250,
+          height: 250,
+          child: CachedImage(
+            imageUrl: arguments["imageUrl"],
+          ),
         )),
       ),
     );

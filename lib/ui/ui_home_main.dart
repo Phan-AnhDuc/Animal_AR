@@ -3,6 +3,7 @@
 import 'dart:math';
 
 import 'package:animal_ar/const/ar_color.dart';
+import 'package:animal_ar/const/ar_image.dart';
 import 'package:animal_ar/const/ar_list_color.dart';
 import 'package:animal_ar/const/ar_theme.dart';
 
@@ -31,17 +32,22 @@ class _HomeMainState extends State<HomeMain> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xffFFCACA),
-      body: Scrollbar(
-        child: CustomScrollView(
-            physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics(),
-            ),
-            slivers: [
-              _buildHeader(context),
-              _buildListAnimal(context, widget.id),
-            ]),
+    return Container(
+      decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(OneImages.ar_background), fit: BoxFit.cover)),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Scrollbar(
+          child: CustomScrollView(
+              physics: const BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics(),
+              ),
+              slivers: [
+                _buildHeader(context),
+                _buildListAnimal(context, widget.id),
+              ]),
+        ),
       ),
     );
   }
@@ -319,7 +325,7 @@ class _HomeMainState extends State<HomeMain> {
         borderRadius: BorderRadius.circular(8),
         boxShadow: const [
           BoxShadow(
-            color: Color.fromARGB(255, 212, 207, 207),
+            color: Color(0xff95BDFF),
             spreadRadius: 1,
             blurRadius: 1,
             // offset: Offset(0, 3),
