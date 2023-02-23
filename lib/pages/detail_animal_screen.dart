@@ -5,6 +5,7 @@ import 'package:animal_ar/const/ar_image.dart';
 import 'package:animal_ar/const/ar_theme.dart';
 import 'package:animal_ar/const/cache/ar_cache_image.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DetailAnimalScreen extends StatefulWidget {
   const DetailAnimalScreen(
@@ -124,18 +125,18 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
               padding: const EdgeInsets.only(top: 20.0),
               child: Text(
                 arguments["nameAnimal"],
-                style:
-                    const TextStyle(fontWeight: FontWeight.w700, fontSize: 35),
+                style: GoogleFonts.aBeeZee(
+                    fontWeight: FontWeight.w700, fontSize: 35),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 10),
               child: Text(
                 "( ${arguments["nameAnimalEnglish"]} )",
-                style: const TextStyle(
+                style: GoogleFonts.aBeeZee(
                     fontWeight: FontWeight.w500,
                     fontSize: 20,
-                    color: Color.fromARGB(255, 148, 149, 152)),
+                    color: const Color.fromARGB(255, 148, 149, 152)),
               ),
             ),
             const SizedBox(
@@ -183,16 +184,16 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
                     border: Border.all(color: OneColors.black, width: 1)),
                 child: Text(
                   arguments["infoAnimal"],
-                  style: const TextStyle(fontSize: 16),
+                  style: GoogleFonts.aBeeZee(fontSize: 16),
                   textAlign: TextAlign.justify,
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 10.0),
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0),
               child: Text(
                 'Có thể bạn quan tâm',
-                style: TextStyle(
+                style: GoogleFonts.aBeeZee(
                     fontSize: 20.0,
                     color: Colors.black,
                     fontWeight: FontWeight.bold),
@@ -218,12 +219,11 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
                 border: Border.all(color: OneColors.black, width: 1)),
             child: Padding(
               padding: const EdgeInsets.all(5.0),
-              child: Text(
-                nganh,
-                style: OneTheme.of(context)
-                    .body1
-                    .copyWith(color: OneColors.black, fontSize: 15),
-              ),
+              child: Text(nganh,
+                  style: GoogleFonts.aBeeZee(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  )),
             ),
           ),
         ],
@@ -239,12 +239,7 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            title,
-            style: OneTheme.of(context)
-                .body2
-                .copyWith(color: OneColors.black, fontSize: 15),
-          ),
+          Text(title, style: GoogleFonts.aBeeZee(fontSize: 15)),
         ],
       ),
     );

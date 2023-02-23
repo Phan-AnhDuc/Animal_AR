@@ -273,7 +273,7 @@ class _HomeMainState extends State<HomeMain> {
                                                     const EdgeInsets.all(4),
                                                 child: Text(
                                                   records["nameAnimal"] ?? "",
-                                                  style: GoogleFonts.notoSans(
+                                                  style: GoogleFonts.aBeeZee(
                                                     fontSize: 18,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.white,
@@ -291,8 +291,8 @@ class _HomeMainState extends State<HomeMain> {
                                             maxLines: 4,
                                             overflow: TextOverflow.ellipsis,
                                             textAlign: TextAlign.justify,
-                                            style:
-                                                const TextStyle(fontSize: 10),
+                                            style: GoogleFonts.aBeeZee(
+                                                fontSize: 10),
                                           ),
                                         ],
                                       ),
@@ -334,12 +334,9 @@ class _HomeMainState extends State<HomeMain> {
       ),
       child: Padding(
         padding: const EdgeInsets.only(top: 6, bottom: 6, left: 10, right: 10),
-        child: Text(
-          title,
-          style: OneTheme.of(context)
-              .body1
-              .copyWith(color: OneColors.black, fontSize: 15),
-        ),
+        child: Text(title,
+            style:
+                GoogleFonts.aBeeZee(fontSize: 15, fontWeight: FontWeight.bold)),
       ),
     );
   }
@@ -365,7 +362,7 @@ class _HomeMainState extends State<HomeMain> {
                       Icon(
                         Icons.arrow_back_ios_new,
                         color: Colors.white,
-                        size: 35,
+                        size: 20,
                       ),
                       SizedBox(width: 10),
                     ],

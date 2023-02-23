@@ -43,6 +43,7 @@ dependencies:
   cached_network_image: ^3.2.3
   timelines: ^0.1.0
   google_fonts: ^4.0.3
+  native_ar_viewer: ^0.0.2
 
 dev_dependencies:
   flutter_test:

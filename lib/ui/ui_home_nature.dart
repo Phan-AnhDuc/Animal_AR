@@ -1,7 +1,8 @@
 import 'package:animal_ar/const/ar_card.dart';
-import 'package:animal_ar/const/ar_color.dart';
+
 import 'package:animal_ar/const/ar_image.dart';
-import 'package:animal_ar/const/ar_theme.dart';
+import 'package:animal_ar/pages/screen_tips.dart';
+
 import 'package:animal_ar/ui/ui_home_main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -30,7 +31,6 @@ class _HomeNatureState extends State<HomeNature> {
               _buildHeadInfo(context),
               _buildHead(context),
               _buildListNature(context),
-              //_buildComingSoon(context),
             ]),
       ),
     );
@@ -41,7 +41,7 @@ class _HomeNatureState extends State<HomeNature> {
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Center(
           child: Container(
-            margin: const EdgeInsets.only(top: 40),
+            margin: const EdgeInsets.only(top: 10),
             color: Colors.transparent,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -59,19 +59,6 @@ class _HomeNatureState extends State<HomeNature> {
                     ),
                   ),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.only(left: 20, right: 20),
-                //   child: InkWell(
-                //       child: Image.asset(OneImages.ar_ice),
-                //       onTap: () {
-                //         Navigator.push(
-                //             context,
-                //             MaterialPageRoute(
-                //                 builder: (context) => const HomeMain(
-                //                       id: 1,
-                //                     )));
-                //       }),
-                // ),
                 Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: InkWell(
@@ -129,7 +116,7 @@ class _HomeNatureState extends State<HomeNature> {
             Align(
               alignment: Alignment.topLeft,
               child: Padding(
-                padding: const EdgeInsets.only(left: 10.0),
+                padding: const EdgeInsets.only(left: 10.0, bottom: 5),
                 child: Text(
                   'Dạng thiên nhiên nổi bật',
                   style: GoogleFonts.aBeeZee(
@@ -207,17 +194,9 @@ class _HomeNatureState extends State<HomeNature> {
       child: Align(
         alignment: Alignment.topLeft,
         child: Padding(
-          padding: const EdgeInsets.only(top: 10.0, left: 15, bottom: 30),
+          padding: const EdgeInsets.only(top: 10.0, left: 15, bottom: 40),
           child: Column(
-            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Text(
-              //   'Animal Kids',
-              //   style: GoogleFonts.montserrat(
-              //     fontSize: 30,
-              //     fontWeight: FontWeight.bold,
-              //   ),
-              // ),
               Align(
                 alignment: Alignment.topLeft,
                 child: SizedBox(

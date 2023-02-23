@@ -1,6 +1,4 @@
 import 'dart:math';
-
-import 'package:animal_ar/const/ar_card.dart';
 import 'package:animal_ar/const/ar_color.dart';
 import 'package:animal_ar/const/ar_image.dart';
 import 'package:animal_ar/const/ar_list_color.dart';
@@ -9,6 +7,7 @@ import 'package:animal_ar/fireBase/fireBase_help.dart';
 import 'package:animal_ar/search/ui_search.dart';
 import 'package:animal_ar/ui/ui_home_main.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ScreenTips extends StatefulWidget {
   const ScreenTips({super.key});
@@ -44,8 +43,6 @@ class _ScreenTipsState extends State<ScreenTips> {
               floating: false,
               delegate: SliverAppBarDelegate(
                 child: Container(
-                    padding: const EdgeInsets.only(
-                        top: 0, bottom: 20, left: 0, right: 0),
                     decoration: BoxDecoration(
                         image: const DecorationImage(
                             image: AssetImage(OneImages.ar_background),
@@ -62,14 +59,7 @@ class _ScreenTipsState extends State<ScreenTips> {
                         ]),
                     child: AppBar(
                       title: const Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Có thể bạn chưa biết',
-                          style: TextStyle(
-                              color: OneColors.textRed,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
+                          alignment: Alignment.center, child: SearchBar()),
                       backgroundColor: Colors.transparent,
                       shadowColor: Colors.transparent,
                     )),
@@ -80,7 +70,6 @@ class _ScreenTipsState extends State<ScreenTips> {
             SliverToBoxAdapter(
                 child: Stack(
               children: [
-                // const SearchBar(),
                 _buildCardAnimal(context),
               ],
             )),
@@ -94,6 +83,26 @@ class _ScreenTipsState extends State<ScreenTips> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        SizedBox(
+          height: 150,
+          child: Image.asset(
+            OneImages.ar_tip,
+            fit: BoxFit.contain,
+          ),
+        ),
+        Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              image: const DecorationImage(
+                  image: AssetImage(OneImages.ar_back_tip), fit: BoxFit.fill),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Text(
+              'CÓ THỂ EM CHƯA BIẾT ?',
+              style: GoogleFonts.aBeeZee(
+                  fontWeight: FontWeight.w900, color: OneColors.textBlack),
+            )),
+        const SizedBox(height: 5),
         ListView.builder(
           physics: const BouncingScrollPhysics(),
           shrinkWrap: true,
@@ -129,7 +138,7 @@ class _ScreenTipsState extends State<ScreenTips> {
                         maxLines: 4,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.justify,
-                        style: const TextStyle(
+                        style: GoogleFonts.aBeeZee(
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                     ),

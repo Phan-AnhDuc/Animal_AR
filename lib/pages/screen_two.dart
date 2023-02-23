@@ -4,6 +4,7 @@ import 'package:animal_ar/const/ar_image.dart';
 import 'package:animal_ar/const/ar_text.dart';
 import 'package:animal_ar/const/ar_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:timelines/timelines.dart';
 
 class ScreenKnown extends StatefulWidget {
@@ -21,12 +22,17 @@ class _ScreenKnownState extends State<ScreenKnown> {
         title: const Text("Lịch sử tiến hóa của sự sống"),
       ),
       body: Container(
-        decoration: const BoxDecoration(image: DecorationImage(image: AssetImage(OneImages.ar_background), fit: BoxFit.cover)),
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(OneImages.ar_background), fit: BoxFit.cover)),
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          body: CustomScrollView(physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()), slivers: [
-            _buildHeader(context),
-          ]),
+          body: CustomScrollView(
+              physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics()),
+              slivers: [
+                _buildHeader(context),
+              ]),
         ),
       ),
     );
@@ -38,21 +44,32 @@ class _ScreenKnownState extends State<ScreenKnown> {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
-            OneCard(
-              borderRadius: BorderRadius.circular(10),
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: const Color(0xFF8BF5FA).withOpacity(0.4)),
               child: Container(
                 padding: const EdgeInsets.all(12),
                 child: Column(
-                  children: const [
-                    Text(OneText.ar_text_1),
-                    SizedBox(height: 10),
-                    Text(OneText.ar_text_2),
+                  children: [
+                    Text(
+                      OneText.ar_text_1,
+                      style: GoogleFonts.aBeeZee(),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      OneText.ar_text_2,
+                      style: GoogleFonts.aBeeZee(),
+                    ),
                   ],
                 ),
               ),
             ),
-            OneCard(
-              borderRadius: BorderRadius.circular(10),
+            const SizedBox(height: 10),
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: const Color(0xFF8BF5FA).withOpacity(0.4)),
               child: Container(
                 padding: const EdgeInsets.all(12),
                 child: Image.asset(OneImages.ar_evulution, fit: BoxFit.cover),
@@ -61,35 +78,31 @@ class _ScreenKnownState extends State<ScreenKnown> {
             const SizedBox(height: 10),
             Container(
               decoration: BoxDecoration(
-                color: OneColors.white,
+                color: const Color(0xFF8BF5FA).withOpacity(0.6),
                 borderRadius: BorderRadius.circular(8),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Color.fromARGB(255, 212, 207, 207),
-                    spreadRadius: 1,
-                    blurRadius: 1,
-                    // offset: Offset(0, 3),
-                  ),
-                ],
               ),
               child: Padding(
                 padding: const EdgeInsets.all(6.0),
-                child: Text(
-                  'Lịch trình cơ bản',
-                  style: OneTheme.of(context).body1.copyWith(color: OneColors.black, fontSize: 15),
-                ),
+                child: Text('Lịch trình cơ bản',
+                    style: GoogleFonts.aBeeZee(
+                        fontSize: 15, fontWeight: FontWeight.bold)),
               ),
             ),
-            const SizedBox(height: 5),
-            OneCard(
-              borderRadius: BorderRadius.circular(10),
+            const SizedBox(height: 10),
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: const Color(0xFF8BF5FA).withOpacity(0.4)),
               child: Padding(
                 padding: const EdgeInsets.only(top: 8.0, bottom: 8),
                 child: _buildTimeline(),
               ),
             ),
-            OneCard(
-              borderRadius: BorderRadius.circular(10),
+            const SizedBox(height: 10),
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: const Color(0xFF8BF5FA).withOpacity(0.4)),
               child: Container(
                 padding: const EdgeInsets.all(12),
                 child: Image.asset(OneImages.ar_evulution2, fit: BoxFit.cover),
@@ -113,9 +126,13 @@ class _ScreenKnownState extends State<ScreenKnown> {
             children: [
               Text(
                 history[index].year,
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                style: GoogleFonts.aBeeZee(
+                    fontWeight: FontWeight.bold, fontSize: 14),
               ),
-              Text(history[index].event),
+              Text(
+                history[index].event,
+                style: GoogleFonts.aBeeZee(),
+              ),
             ],
           ),
         ),

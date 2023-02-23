@@ -62,7 +62,9 @@ class _SearchBarState extends State<SearchBar> {
                 ),
           prefixIcon: Icon(
             Icons.search,
-            color: _controller.text.isNotEmpty ? Theme.of(context).primaryColor : Colors.grey[400],
+            color: _controller.text.isNotEmpty
+                ? Theme.of(context).primaryColor
+                : Colors.grey[400],
           ),
         ),
       ),
