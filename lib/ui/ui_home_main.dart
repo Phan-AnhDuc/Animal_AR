@@ -1,12 +1,8 @@
 // ignore_for_file: unused_local_variable, avoid_print, unrelated_type_equality_checks, prefer_typing_uninitialized_variables
 
 import 'dart:math';
-
-import 'package:animal_ar/const/ar_color.dart';
 import 'package:animal_ar/const/ar_image.dart';
 import 'package:animal_ar/const/ar_list_color.dart';
-import 'package:animal_ar/const/ar_theme.dart';
-
 import 'package:animal_ar/const/cache/ar_cache_image.dart';
 import 'package:animal_ar/pages/detail_animal_screen.dart';
 import 'package:animal_ar/search/ui_search.dart';

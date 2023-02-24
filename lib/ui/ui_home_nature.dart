@@ -47,7 +47,7 @@ class _HomeNatureState extends State<HomeNature> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 30),
+                  padding: const EdgeInsets.only(left: 20),
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: Text(
@@ -60,7 +60,7 @@ class _HomeNatureState extends State<HomeNature> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  padding: const EdgeInsets.only(left: 10, right: 10),
                   child: InkWell(
                       child: Image.asset(OneImages.ar_ocean),
                       onTap: () {
@@ -73,7 +73,7 @@ class _HomeNatureState extends State<HomeNature> {
                       }),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  padding: const EdgeInsets.only(left: 10, right: 10),
                   child: InkWell(
                       child: Image.asset(OneImages.ar_grass),
                       onTap: () {
@@ -86,7 +86,7 @@ class _HomeNatureState extends State<HomeNature> {
                       }),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  padding: const EdgeInsets.only(left: 10, right: 10),
                   child: InkWell(
                       child: Image.asset(OneImages.ar_jura),
                       onTap: () {
@@ -110,13 +110,13 @@ class _HomeNatureState extends State<HomeNature> {
   SliverToBoxAdapter _buildHead(BuildContext context) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: const EdgeInsets.only(left: 20.0, right: 20),
+        padding: const EdgeInsets.only(left: 10.0, right: 10),
         child: Column(
           children: [
             Align(
               alignment: Alignment.topLeft,
               child: Padding(
-                padding: const EdgeInsets.only(left: 10.0, bottom: 5),
+                padding: const EdgeInsets.only(left: 5, bottom: 5),
                 child: Text(
                   'Dạng thiên nhiên nổi bật',
                   style: GoogleFonts.aBeeZee(
@@ -154,13 +154,13 @@ class _HomeNatureState extends State<HomeNature> {
                         child: Image.asset(OneImages.ar_imageLogo)),
                   ),
                   SizedBox(
-                    height: 250,
-                    width: 250,
+                    height: 270,
+                    width: 270,
                     child: Image.asset(OneImages.ar_tiger_kid),
                   ),
                   Positioned(
-                    top: 160,
-                    left: 215,
+                    top: 180,
+                    left: 230,
                     child: OneCard(
                       borderRadius: BorderRadius.circular(25),
                       padding: const EdgeInsets.all(8),
@@ -194,7 +194,7 @@ class _HomeNatureState extends State<HomeNature> {
       child: Align(
         alignment: Alignment.topLeft,
         child: Padding(
-          padding: const EdgeInsets.only(top: 10.0, left: 15, bottom: 40),
+          padding: const EdgeInsets.only(top: 10.0, left: 10, bottom: 40),
           child: Column(
             children: [
               Align(
@@ -206,7 +206,7 @@ class _HomeNatureState extends State<HomeNature> {
               Align(
                 alignment: Alignment.topLeft,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 15.0),
+                  padding: const EdgeInsets.only(left: 10.0),
                   child: Text(
                     'Chào mừng bạn đã đến',
                     style: GoogleFonts.montserrat(

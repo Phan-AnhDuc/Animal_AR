@@ -1,8 +1,5 @@
-import 'package:animal_ar/const/ar_card.dart';
-import 'package:animal_ar/const/ar_color.dart';
 import 'package:animal_ar/const/ar_image.dart';
 import 'package:animal_ar/const/ar_text.dart';
-import 'package:animal_ar/const/ar_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:timelines/timelines.dart';
@@ -46,8 +43,9 @@ class _ScreenKnownState extends State<ScreenKnown> {
           children: [
             Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: const Color(0xFF8BF5FA).withOpacity(0.4)),
+                borderRadius: BorderRadius.circular(10),
+                color: const Color(0xFF8BF5FA).withOpacity(0.4),
+              ),
               child: Container(
                 padding: const EdgeInsets.all(12),
                 child: Column(

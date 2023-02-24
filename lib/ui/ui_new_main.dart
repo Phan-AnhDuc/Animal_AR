@@ -14,12 +14,17 @@ class _ScreenNewsState extends State<ScreenNews> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(image: DecorationImage(image: AssetImage(OneImages.ar_background), fit: BoxFit.cover)),
+      decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(OneImages.ar_background), fit: BoxFit.cover)),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: CustomScrollView(physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()), slivers: [
-          _buildListEvolution(context),
-        ]),
+        body: CustomScrollView(
+            physics: const BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics()),
+            slivers: [
+              _buildListEvolution(context),
+            ]),
       ),
     );
   }
@@ -37,8 +42,14 @@ class _ScreenNewsState extends State<ScreenNews> {
                 }));
               },
               child: Container(
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: OneColors.bHA),
-                height: 50,
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white, width: 4),
+                    borderRadius: BorderRadius.circular(10),
+                    color: OneColors.bHA,
+                    image: const DecorationImage(
+                        image: AssetImage(OneImages.ar_evolutionPeople),
+                        fit: BoxFit.cover)),
+                height: 120,
               ),
             ),
             Padding(
@@ -48,7 +59,8 @@ class _ScreenNewsState extends State<ScreenNews> {
                   Expanded(
                     flex: 1,
                     child: Container(
-                      decoration: const BoxDecoration(shape: BoxShape.circle, color: OneColors.bHD),
+                      decoration: const BoxDecoration(
+                          shape: BoxShape.circle, color: OneColors.bHD),
                       height: 20,
                       width: 20,
                     ),
@@ -56,7 +68,9 @@ class _ScreenNewsState extends State<ScreenNews> {
                   Expanded(
                     flex: 5,
                     child: Container(
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: OneColors.bHA),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: OneColors.bHA),
                       height: 50,
                     ),
                   ),
@@ -70,7 +84,8 @@ class _ScreenNewsState extends State<ScreenNews> {
                   Expanded(
                     flex: 1,
                     child: Container(
-                      decoration: const BoxDecoration(shape: BoxShape.circle, color: OneColors.bHD),
+                      decoration: const BoxDecoration(
+                          shape: BoxShape.circle, color: OneColors.bHD),
                       height: 20,
                       width: 20,
                     ),
@@ -78,7 +93,9 @@ class _ScreenNewsState extends State<ScreenNews> {
                   Expanded(
                     flex: 5,
                     child: Container(
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: OneColors.bHA),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: OneColors.bHA),
                       height: 50,
                     ),
                   ),
@@ -92,7 +109,8 @@ class _ScreenNewsState extends State<ScreenNews> {
                   Expanded(
                     flex: 1,
                     child: Container(
-                      decoration: const BoxDecoration(shape: BoxShape.circle, color: OneColors.bHD),
+                      decoration: const BoxDecoration(
+                          shape: BoxShape.circle, color: OneColors.bHD),
                       height: 20,
                       width: 20,
                     ),
@@ -100,7 +118,9 @@ class _ScreenNewsState extends State<ScreenNews> {
                   Expanded(
                     flex: 5,
                     child: Container(
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: OneColors.bHA),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: OneColors.bHA),
                       height: 50,
                     ),
                   ),

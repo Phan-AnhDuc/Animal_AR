@@ -2,7 +2,6 @@
 
 import 'package:animal_ar/const/ar_color.dart';
 import 'package:animal_ar/const/ar_image.dart';
-import 'package:animal_ar/const/ar_theme.dart';
 import 'package:animal_ar/const/cache/ar_cache_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

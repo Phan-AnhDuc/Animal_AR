@@ -1,6 +1,5 @@
+import 'package:animal_ar/pages/evolution_screen.dart';
 import 'package:animal_ar/pages/screen_tips.dart';
-import 'package:animal_ar/pages/screen_two.dart';
-import 'package:animal_ar/ui/ui_new_main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -14,14 +13,15 @@ class HomeTabs extends StatefulWidget {
 }
 
 class _HomeTabsState extends State<HomeTabs> {
-  final CollectionReference homedata = FirebaseFirestore.instance.collection("homedata");
+  final CollectionReference homedata =
+      FirebaseFirestore.instance.collection("homedata");
 
   var _indexPages = 0;
 
   final pageOtions = [
     const HomeNature(),
     const ScreenTips(),
-    const ScreenNews(),
+    const EvolutionScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -35,9 +35,27 @@ class _HomeTabsState extends State<HomeTabs> {
           color: const Color(0xffA084DC),
           animationCurve: Curves.easeOutSine,
           items: <Widget>[
-            Container(height: 50, width: 50, decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(30)), child: Image.asset("assets/images/banchan.png")),
-            Container(height: 50, width: 50, decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(30)), child: Image.asset("assets/images/banchan.png")),
-            Container(height: 50, width: 50, decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(30)), child: Image.asset("assets/images/banchan.png")),
+            Container(
+                height: 50,
+                width: 50,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(30)),
+                child: Image.asset("assets/images/banchan.png")),
+            Container(
+                height: 50,
+                width: 50,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(30)),
+                child: Image.asset("assets/images/banchan.png")),
+            Container(
+                height: 50,
+                width: 50,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(30)),
+                child: Image.asset("assets/images/banchan.png")),
           ],
           onTap: ((int index) {
             setState(() {
