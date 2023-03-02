@@ -15,14 +15,7 @@ class HomeNature extends StatefulWidget {
 
 class _HomeNatureState extends State<HomeNature> {
   int? animalId;
-  _launchAR(String model3DUrl) async {
-    if (io.Platform.isAndroid) {
-      await NativeArViewer.launchAR(model3DUrl);
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Platform not supported')));
-    }
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -39,15 +32,6 @@ class _HomeNatureState extends State<HomeNature> {
               _buildHeadInfo(context),
               _buildHead(context),
               _buildListNature(context),
-              SliverToBoxAdapter(
-                child: ElevatedButton(
-                  onPressed: () {
-                    _launchAR(
-                        "https://firebasestorage.googleapis.com/v0/b/livvinyl-health-connector.appspot.com/o/catcow.glb?alt=media&token=da87cd4d-c9c1-4176-b1b3-a0b6fdc8734b");
-                  },
-                  child: const Text("AR view"),
-                ),
-              )
             ]),
       ),
     );
