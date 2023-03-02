@@ -1,6 +1,7 @@
 // ignore_for_file: unused_local_variable, avoid_print, unrelated_type_equality_checks, prefer_typing_uninitialized_variables
 
 import 'dart:math';
+import 'package:animal_ar/const/ar_color.dart';
 import 'package:animal_ar/const/ar_image.dart';
 import 'package:animal_ar/const/ar_list_color.dart';
 import 'package:animal_ar/const/cache/ar_cache_image.dart';
@@ -75,7 +76,7 @@ class _HomeMainState extends State<HomeMain> {
                                             MediaQuery.of(context).size.width,
                                         child:
                                             _buildListView(snapshot, "anco")),
-                                    const SizedBox(height: 20),
+                                    // const SizedBox(height: 20),
                                     _buildNoidung('Động vật ăn thịt'),
                                     SizedBox(
                                         height:
@@ -150,7 +151,7 @@ class _HomeMainState extends State<HomeMain> {
                                             MediaQuery.of(context).size.width,
                                         child:
                                             _buildListView(snapshot, "anco")),
-                                    const SizedBox(height: 10),
+                                    // const SizedBox(height: 10),
                                     _buildNoidung('Động vật ăn cỏ'),
                                     SizedBox(
                                         height:
@@ -225,6 +226,8 @@ class _HomeMainState extends State<HomeMain> {
                                       borderRadius: const BorderRadius.only(
                                         bottomLeft: Radius.circular(15),
                                         bottomRight: Radius.circular(15),
+                                        topLeft: Radius.circular(15),
+                                        topRight: Radius.circular(15),
                                       ),
                                       boxShadow: const [
                                         BoxShadow(
@@ -284,7 +287,7 @@ class _HomeMainState extends State<HomeMain> {
                                           const SizedBox(height: 10),
                                           Text(
                                             records["infoAnimal"] ?? "",
-                                            maxLines: 4,
+                                            maxLines: 3,
                                             overflow: TextOverflow.ellipsis,
                                             textAlign: TextAlign.justify,
                                             style: GoogleFonts.aBeeZee(
@@ -317,22 +320,17 @@ class _HomeMainState extends State<HomeMain> {
   Container _buildNoidung(String title) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xffB4E4FF),
+        color: const Color(0xff95BDFF),
         borderRadius: BorderRadius.circular(8),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0xff95BDFF),
-            spreadRadius: 1,
-            blurRadius: 1,
-            // offset: Offset(0, 3),
-          ),
-        ],
+        border: Border.all(color: OneColors.textWhite, width: 1),
       ),
       child: Padding(
         padding: const EdgeInsets.only(top: 6, bottom: 6, left: 10, right: 10),
         child: Text(title,
-            style:
-                GoogleFonts.aBeeZee(fontSize: 15, fontWeight: FontWeight.bold)),
+            style: GoogleFonts.aBeeZee(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: OneColors.textWhite)),
       ),
     );
   }

@@ -1,13 +1,9 @@
 import 'package:animal_ar/const/ar_card.dart';
-
 import 'package:animal_ar/const/ar_image.dart';
-import 'package:animal_ar/pages/screen_tips.dart';
-
 import 'package:animal_ar/ui/ui_home_main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:io' as io;
-
 import 'package:native_ar_viewer/native_ar_viewer.dart';
 
 class HomeNature extends StatefulWidget {
@@ -23,29 +19,36 @@ class _HomeNatureState extends State<HomeNature> {
     if (io.Platform.isAndroid) {
       await NativeArViewer.launchAR(model3DUrl);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Platform not supported')));
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Platform not supported')));
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(image: DecorationImage(image: AssetImage(OneImages.ar_background), fit: BoxFit.cover)),
+      decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(OneImages.ar_background), fit: BoxFit.cover)),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: CustomScrollView(physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()), slivers: [
-          _buildHeadInfo(context),
-          _buildHead(context),
-          _buildListNature(context),
-          SliverToBoxAdapter(
-            child: ElevatedButton(
-              onPressed: () {
-                _launchAR("https://firebasestorage.googleapis.com/v0/b/livvinyl-health-connector.appspot.com/o/catcow.glb?alt=media&token=da87cd4d-c9c1-4176-b1b3-a0b6fdc8734b");
-              },
-              child: const Text("AR view"),
-            ),
-          )
-        ]),
+        body: CustomScrollView(
+            physics: const BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics()),
+            slivers: [
+              _buildHeadInfo(context),
+              _buildHead(context),
+              _buildListNature(context),
+              SliverToBoxAdapter(
+                child: ElevatedButton(
+                  onPressed: () {
+                    _launchAR(
+                        "https://firebasestorage.googleapis.com/v0/b/livvinyl-health-connector.appspot.com/o/catcow.glb?alt=media&token=da87cd4d-c9c1-4176-b1b3-a0b6fdc8734b");
+                  },
+                  child: const Text("AR view"),
+                ),
+              )
+            ]),
       ),
     );
   }
@@ -163,7 +166,9 @@ class _HomeNatureState extends State<HomeNature> {
                         ),
                       ],
                     ),
-                    child: ClipRRect(borderRadius: BorderRadius.circular(25), child: Image.asset(OneImages.ar_imageLogo)),
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Image.asset(OneImages.ar_imageLogo)),
                   ),
                   SizedBox(
                     height: 270,

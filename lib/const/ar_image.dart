@@ -17,4 +17,5 @@ class OneImages {
   static const String ar_tip = 'assets/images/tip.png';
   static const String ar_back_tip = 'assets/images/back_tip.jpg';
   static const String ar_evolutionPeople = 'assets/images/evolutionPeople.jpg';
+  static const String ar_backfoot = 'assets/images/backfoot.avif';
 }
