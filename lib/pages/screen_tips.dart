@@ -31,9 +31,7 @@ class _ScreenTipsState extends State<ScreenTips> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage(OneImages.ar_background), fit: BoxFit.cover)),
+      decoration: const BoxDecoration(image: DecorationImage(image: AssetImage(OneImages.ar_background), fit: BoxFit.cover)),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Scrollbar(
@@ -44,22 +42,11 @@ class _ScreenTipsState extends State<ScreenTips> {
               delegate: SliverAppBarDelegate(
                 child: Container(
                     decoration: BoxDecoration(
-                        image: const DecorationImage(
-                            image: AssetImage(OneImages.ar_background),
-                            fit: BoxFit.cover),
-                        borderRadius: const BorderRadius.only(
-                            bottomLeft: Radius.circular(30),
-                            bottomRight: Radius.circular(30)),
-                        boxShadow: [
-                          BoxShadow(
-                              offset: const Offset(0, 1),
-                              color: OneColors.textGreyDark.withOpacity(0.1),
-                              blurRadius: 15,
-                              spreadRadius: 1)
-                        ]),
+                        image: const DecorationImage(image: AssetImage(OneImages.ar_background), fit: BoxFit.cover),
+                        borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
+                        boxShadow: [BoxShadow(offset: const Offset(0, 1), color: OneColors.textGreyDark.withOpacity(0.1), blurRadius: 15, spreadRadius: 1)]),
                     child: AppBar(
-                      title: const Align(
-                          alignment: Alignment.center, child: SearchBar()),
+                      title: const Align(alignment: Alignment.center, child: SearchBar()),
                       backgroundColor: Colors.transparent,
                       shadowColor: Colors.transparent,
                     )),
@@ -93,30 +80,25 @@ class _ScreenTipsState extends State<ScreenTips> {
         Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              image: const DecorationImage(
-                  image: AssetImage(OneImages.ar_back_tip), fit: BoxFit.fill),
+              image: const DecorationImage(image: AssetImage(OneImages.ar_back_tip), fit: BoxFit.fill),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Text(
               'CÓ THỂ EM CHƯA BIẾT ?',
-              style: GoogleFonts.aBeeZee(
-                  fontWeight: FontWeight.w900, color: OneColors.textBlack),
+              style: GoogleFonts.aBeeZee(fontWeight: FontWeight.w900, color: OneColors.textBlack),
             )),
         const SizedBox(height: 5),
         ListView.builder(
           physics: const BouncingScrollPhysics(),
           shrinkWrap: true,
-          padding:
-              const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 26),
+          padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 26),
           itemCount: _tipsDataList.length,
           itemBuilder: (context, index) {
             Random random = Random();
             var indexRandom = random.nextInt(ColorRamdom.animalColor.length);
             return Container(
               margin: const EdgeInsets.only(bottom: 15),
-              decoration: BoxDecoration(
-                  color: ColorRamdom.animalColor[indexRandom],
-                  borderRadius: BorderRadius.circular(20)),
+              decoration: BoxDecoration(color: ColorRamdom.animalColor[indexRandom], borderRadius: BorderRadius.circular(20)),
               child: Container(
                 padding: const EdgeInsets.all(10),
                 height: 110,
@@ -138,8 +120,7 @@ class _ScreenTipsState extends State<ScreenTips> {
                         maxLines: 4,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.justify,
-                        style: GoogleFonts.aBeeZee(
-                            fontSize: 13, fontWeight: FontWeight.bold),
+                        style: GoogleFonts.aBeeZee(fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],

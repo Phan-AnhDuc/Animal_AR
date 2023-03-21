@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
+import 'dart:ui';
+
 import 'package:animal_ar/const/ar_color.dart';
 import 'package:animal_ar/const/ar_image.dart';
 import 'package:animal_ar/const/cache/ar_cache_image.dart';
@@ -9,9 +11,7 @@ import 'package:native_ar_viewer/native_ar_viewer.dart';
 import 'dart:io' as io;
 
 class DetailAnimalScreen extends StatefulWidget {
-  const DetailAnimalScreen(
-      {Key? key, required this.arguments, required this.colors})
-      : super(key: key);
+  const DetailAnimalScreen({Key? key, required this.arguments, required this.colors}) : super(key: key);
 
   final arguments;
   final Color colors;
@@ -26,10 +26,10 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
     if (io.Platform.isAndroid) {
       await NativeArViewer.launchAR(model3DUrl);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Platform not supported')));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Platform not supported')));
     }
   }
+
   @override
   Widget build(BuildContext context) {
     plkh = widget.arguments["plkh"];
@@ -45,7 +45,7 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
         children: [
           _buildImageAnimal(context, widget.arguments, widget.colors),
           _buildInfoAnimal(context, widget.arguments, plkh),
-          _buildScanButton(context,widget.arguments),
+          _buildScanButton(context, widget.arguments),
         ],
       ),
     );
@@ -60,7 +60,6 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
         color: Colors.transparent,
         child: InkWell(
           onTap: () {
-            print('-----log------${arguments["3Dimage"]}');
             _launchAR(arguments["3Dimage"]);
           },
           child: Stack(children: [
@@ -72,7 +71,7 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
                     topLeft: Radius.circular(30),
                     topRight: Radius.circular(30),
                   ),
-                  color: Color(0xff372948),
+                  color: Color(0xFFFCC2FC),
                 ),
                 height: 80,
                 width: MediaQuery.of(context).size.width,
@@ -81,23 +80,11 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
             Align(
               alignment: Alignment.topCenter,
               child: Container(
-                height: 80,
-                width: 80,
-                decoration: const BoxDecoration(
-                    color: Color(0xffFF577F), shape: BoxShape.circle),
+                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(100)),
+                padding: const EdgeInsets.all(2),
                 child: Image.asset(
-                  "assets/images/banchan.png",
-                  scale: 0.6,
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Padding(
-                padding: const EdgeInsets.all(18.0),
-                child: Image.asset(
-                  "assets/images/scan.png",
-                  scale: 1.1,
+                  "assets/images/ar6.png",
+                  scale: 6,
                 ),
               ),
             ),
@@ -107,8 +94,7 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
     );
   }
 
-  SingleChildScrollView _buildInfoAnimal(
-      BuildContext context, var arguments, var plkh) {
+  SingleChildScrollView _buildInfoAnimal(BuildContext context, var arguments, var plkh) {
     String gioi = plkh["Giới"];
     String bo = plkh["Bộ"];
     String lop = plkh["Lớp"];
@@ -130,28 +116,31 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
             //     Color.fromARGB(255, 247, 190, 190),
             //   ],
             // ),
-            image: const DecorationImage(
-                image: AssetImage(OneImages.ar_background), fit: BoxFit.cover),
-            borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(30), topRight: Radius.circular(30))),
+            image: const DecorationImage(image: AssetImage(OneImages.ar_background), fit: BoxFit.cover),
+            borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30))),
         child: Column(
           children: [
+            Container(
+              margin: const EdgeInsets.only(top: 8),
+              height: 5,
+              width: 48,
+              decoration: BoxDecoration(
+                color: Colors.grey.withOpacity(0.7),
+                borderRadius: const BorderRadius.all(Radius.circular(2.5)),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 20.0),
               child: Text(
                 arguments["nameAnimal"],
-                style: GoogleFonts.aBeeZee(
-                    fontWeight: FontWeight.w700, fontSize: 35),
+                style: GoogleFonts.aBeeZee(fontWeight: FontWeight.w700, fontSize: 35),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 10),
               child: Text(
                 "( ${arguments["nameAnimalEnglish"]} )",
-                style: GoogleFonts.aBeeZee(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 20,
-                    color: const Color.fromARGB(255, 148, 149, 152)),
+                style: GoogleFonts.aBeeZee(fontWeight: FontWeight.w500, fontSize: 20, color: const Color.fromARGB(255, 148, 149, 152)),
               ),
             ),
             const SizedBox(
@@ -193,10 +182,7 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
               padding: const EdgeInsets.all(12.0),
               child: Container(
                 padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.6),
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: OneColors.black, width: 1)),
+                decoration: BoxDecoration(color: Colors.white.withOpacity(0.6), borderRadius: BorderRadius.circular(10), border: Border.all(color: OneColors.black, width: 1)),
                 child: Text(
                   arguments["infoAnimal"],
                   style: GoogleFonts.aBeeZee(fontSize: 16),
@@ -208,10 +194,7 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
               padding: const EdgeInsets.only(top: 10.0),
               child: Text(
                 'Có thể bạn quan tâm',
-                style: GoogleFonts.aBeeZee(
-                    fontSize: 20.0,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold),
+                style: GoogleFonts.aBeeZee(fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold),
               ),
             ),
             const SizedBox(height: 150),
@@ -228,10 +211,7 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.6),
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: OneColors.black, width: 1)),
+            decoration: BoxDecoration(color: Colors.white.withOpacity(0.6), borderRadius: BorderRadius.circular(10), border: Border.all(color: OneColors.black, width: 1)),
             child: Padding(
               padding: const EdgeInsets.all(5.0),
               child: Text(nganh,
@@ -260,14 +240,12 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
     );
   }
 
-  Container _buildImageAnimal(
-      BuildContext context, var arguments, Color colors) {
+  Container _buildImageAnimal(BuildContext context, var arguments, Color colors) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.6,
       // color: colors,
       decoration: const BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage(OneImages.ar_background), fit: BoxFit.cover),
+        image: DecorationImage(image: AssetImage(OneImages.ar_background), fit: BoxFit.cover),
       ),
       child: Padding(
         padding: const EdgeInsets.only(bottom: 50),
