@@ -1,10 +1,15 @@
 import 'package:animal_ar/const/ar_card.dart';
+import 'package:animal_ar/const/ar_color.dart';
 import 'package:animal_ar/const/ar_image.dart';
 import 'package:animal_ar/pages/evolution_screen.dart';
 import 'package:animal_ar/pages/screen_tips.dart';
+import 'package:animal_ar/pages/screen_two.dart';
 import 'package:animal_ar/ui/ui_home_main.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'ui_home_tracking.dart';
 
 class HomeNature extends StatefulWidget {
   const HomeNature({super.key});
@@ -22,12 +27,132 @@ class _HomeNatureState extends State<HomeNature> {
       decoration: const BoxDecoration(image: DecorationImage(image: AssetImage(OneImages.ar_background), fit: BoxFit.cover)),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: CustomScrollView(physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()), slivers: [
-          _buildHeadInfo(context),
-          _buildHead(context),
-          _buildEveryThing(context),
-          _buildListNature(context),
-        ]),
+        body: Stack(
+          children: [
+            CustomScrollView(physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()), slivers: [
+              _buildHeadInfo(context),
+              _buildHead(context),
+              _buildEveryThing(context),
+              _buildListNature(context),
+            ]),
+            _buildButtonOpenSideBar(context),
+          ],
+        ),
+        endDrawer: _buildDrawer(),
+      ),
+    );
+  }
+
+  Widget _buildDrawer() {
+    return Drawer(
+      backgroundColor: Colors.transparent,
+      child: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/17545.jpg'),
+            fit: BoxFit.cover,
+          ),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(50),
+            bottomLeft: Radius.circular(50),
+          ),
+        ),
+        child: ListView(
+          children: <Widget>[
+            // List of items in drawer
+            ListTile(
+              leading: const Icon(
+                Icons.home,
+                size: 30,
+                color: OneColors.black,
+              ),
+              title: Text(
+                'Trang chủ',
+                style: GoogleFonts.aBeeZee(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              onTap: () {
+                Get.to(() => const HomeNature(), curve: Curves.linear, transition: Transition.rightToLeft);
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.ad_units_outlined,
+                size: 30,
+                color: OneColors.black,
+              ),
+              title: Text(
+                'Quét ảnh',
+                style: GoogleFonts.aBeeZee(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              onTap: () {
+                Get.to(() => const TrackingImange(), curve: Curves.linear, transition: Transition.rightToLeft);
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.join_right,
+                size: 30,
+                color: OneColors.black,
+              ),
+              title: Text(
+                'Lịch sử',
+                style: GoogleFonts.aBeeZee(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              onTap: () {
+                Get.to(() => const ScreenKnown(), curve: Curves.linear, transition: Transition.rightToLeft);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildButtonOpenSideBar(BuildContext context) {
+    return Builder(
+      builder: (context) => Align(
+        alignment: Alignment.topRight,
+        child: Column(
+          children: [
+            InkWell(
+              onTap: () {
+                Scaffold.of(context).openEndDrawer();
+              },
+              child: Container(
+                height: 40,
+                width: 40,
+                margin: const EdgeInsets.only(top: 70, right: 20),
+                decoration: BoxDecoration(
+                    color: const Color(0xFFA084DC),
+                    shape: BoxShape.circle,
+                    boxShadow: const [
+                      BoxShadow(
+                        color: OneColors.grey,
+                        blurRadius: 5,
+                      ),
+                    ],
+                    border: Border.all(color: OneColors.white, width: 1)),
+                child: const Icon(
+                  Icons.article_outlined,
+                  size: 25,
+                  color: OneColors.white,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -39,7 +164,7 @@ class _HomeNatureState extends State<HomeNature> {
         children: <Widget>[
           InkWell(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const ScreenTips()));
+              Get.to(() => const ScreenTips(), curve: Curves.linear, transition: Transition.rightToLeft);
             },
             child: Column(
               children: [
@@ -125,7 +250,7 @@ class _HomeNatureState extends State<HomeNature> {
           ),
           InkWell(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const EvolutionScreen()));
+              Get.to(() => const EvolutionScreen(), curve: Curves.linear, transition: Transition.rightToLeft);
             },
             child: Container(
               color: Colors.transparent,
@@ -245,12 +370,7 @@ class _HomeNatureState extends State<HomeNature> {
                   child: InkWell(
                       child: Image.asset(OneImages.ar_ocean),
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const HomeMain(
-                                      id: 2,
-                                    )));
+                        Get.to(() => const HomeMain(id: 2), curve: Curves.linear, transition: Transition.rightToLeft);
                       }),
                 ),
                 Padding(
@@ -258,12 +378,7 @@ class _HomeNatureState extends State<HomeNature> {
                   child: InkWell(
                       child: Image.asset(OneImages.ar_grass),
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const HomeMain(
-                                      id: 3,
-                                    )));
+                        Get.to(() => const HomeMain(id: 3), curve: Curves.linear, transition: Transition.rightToLeft);
                       }),
                 ),
                 Padding(
@@ -271,12 +386,7 @@ class _HomeNatureState extends State<HomeNature> {
                   child: InkWell(
                       child: Image.asset(OneImages.ar_jura),
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const HomeMain(
-                                      id: 4,
-                                    )));
+                        Get.to(() => const HomeMain(id: 4), curve: Curves.linear, transition: Transition.rightToLeft);
                       }),
                 ),
                 const SizedBox(height: 30),
@@ -310,12 +420,7 @@ class _HomeNatureState extends State<HomeNature> {
             const SizedBox(height: 20),
             InkWell(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const HomeMain(
-                              id: 1,
-                            )));
+                Get.to(() => const HomeMain(id: 1), curve: Curves.linear, transition: Transition.rightToLeft);
               },
               child: Stack(
                 children: [
@@ -338,8 +443,8 @@ class _HomeNatureState extends State<HomeNature> {
                     child: Image.asset(OneImages.ar_tiger_kid),
                   ),
                   Positioned(
-                    top: 180,
-                    left: 230,
+                    bottom: 40,
+                    right: 20,
                     child: OneCard(
                       borderRadius: BorderRadius.circular(25),
                       padding: const EdgeInsets.all(8),

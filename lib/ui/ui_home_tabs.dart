@@ -1,7 +1,4 @@
 import 'package:animal_ar/pages/screen_two.dart';
-import 'package:animal_ar/test.dart';
-import 'package:animal_ar/test2.dart';
-import 'package:animal_ar/test3.dart';
 import 'package:animal_ar/ui/ui_home_tracking.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';

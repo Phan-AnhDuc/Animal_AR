@@ -9,6 +9,7 @@ import 'package:animal_ar/pages/detail_animal_screen.dart';
 import 'package:animal_ar/search/ui_search.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeMain extends StatefulWidget {
@@ -97,11 +98,11 @@ class _HomeMainState extends State<HomeMain> {
                           id == 4
                               ? Column(
                                   children: [
-                                    _buildNoidung('Động vật ăn cỏ'),
-                                    SizedBox(height: MediaQuery.of(context).size.height * 0.4, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "anco")),
+                                    _buildNoidung('Khủng long trên cạn'),
+                                    SizedBox(height: MediaQuery.of(context).size.height * 0.4, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "trencan")),
                                     // const SizedBox(height: 10),
-                                    _buildNoidung('Động vật ăn cỏ'),
-                                    SizedBox(height: MediaQuery.of(context).size.height * 0.4, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "anthit")),
+                                    _buildNoidung('Khủng long dưới nước'),
+                                    SizedBox(height: MediaQuery.of(context).size.height * 0.4, width: MediaQuery.of(context).size.width, child: _buildListView(snapshot, "duoinuoc")),
                                   ],
                                 )
                               : const SizedBox(),
@@ -131,13 +132,13 @@ class _HomeMainState extends State<HomeMain> {
           return (idname == idName && iD == widget.id)
               ? InkWell(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DetailAnimalScreen(
-                                  arguments: records,
-                                  colors: ColorRamdom.animalColor[indexRandom],
-                                )));
+                    Get.to(
+                        () => DetailAnimalScreen(
+                              arguments: records,
+                              colors: ColorRamdom.animalColor[indexRandom],
+                            ),
+                        curve: Curves.linear,
+                        transition: Transition.rightToLeft);
                   },
                   child: Container(
                     margin: const EdgeInsets.all(8),
@@ -198,7 +199,7 @@ class _HomeMainState extends State<HomeMain> {
                                                 child: Text(
                                                   records["nameAnimal"] ?? "",
                                                   style: GoogleFonts.aBeeZee(
-                                                    fontSize: 18,
+                                                    fontSize: 17,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.white,
                                                   ),
@@ -214,7 +215,7 @@ class _HomeMainState extends State<HomeMain> {
                                             maxLines: 3,
                                             overflow: TextOverflow.ellipsis,
                                             textAlign: TextAlign.justify,
-                                            style: GoogleFonts.aBeeZee(fontSize: 10),
+                                            style: GoogleFonts.aBeeZee(fontSize: 9),
                                           ),
                                         ],
                                       ),

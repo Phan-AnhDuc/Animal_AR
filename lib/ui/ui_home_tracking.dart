@@ -36,8 +36,154 @@ class _TrackingImangeState extends State<TrackingImange> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: CustomScrollView(physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()), slivers: [
+          _buildHead(),
           _buildListTracking(),
         ]),
+      ),
+    );
+  }
+
+  SliverToBoxAdapter _buildHead() {
+    return SliverToBoxAdapter(
+      child: Column(
+        children: [
+          const SizedBox(height: 70),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.8),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'Cách sử dụng quét hình ảnh',
+                    style: GoogleFonts.aBeeZee(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 30, left: 10, right: 10, bottom: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                  height: 70,
+                                  width: 70,
+                                  child: Image.asset(
+                                    'assets/images/ex1.png',
+                                    fit: BoxFit.cover,
+                                  )),
+                              const SizedBox(height: 20),
+                              Text(
+                                'Chọn động vật bạn muốn quét',
+                                style: GoogleFonts.aBeeZee(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                                textAlign: TextAlign.center,
+                              )
+                            ],
+                          ),
+                        ),
+                        const Expanded(
+                          flex: 1,
+                          child: Icon(
+                            Icons.arrow_right_alt,
+                            size: 40,
+                            color: OneColors.black,
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                  height: 70,
+                                  width: 70,
+                                  child: Image.asset(
+                                    'assets/images/ex2.png',
+                                    fit: BoxFit.cover,
+                                  )),
+                              const SizedBox(height: 20),
+                              Text(
+                                'Quét vào hình ảnh cố định của nó',
+                                style: GoogleFonts.aBeeZee(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                                textAlign: TextAlign.center,
+                              )
+                            ],
+                          ),
+                        ),
+                        const Expanded(
+                          flex: 1,
+                          child: Icon(
+                            Icons.arrow_right_alt,
+                            size: 40,
+                            color: OneColors.black,
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                  height: 70,
+                                  width: 70,
+                                  child: Image.asset(
+                                    'assets/images/ex3.png',
+                                    fit: BoxFit.cover,
+                                  )),
+                              const SizedBox(height: 20),
+                              Text(
+                                'Giữ cố định máy để hiện ảnh 3D',
+                                style: GoogleFonts.aBeeZee(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                                textAlign: TextAlign.center,
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.8),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            padding: const EdgeInsets.all(10),
+            child: Text(
+              'Danh sách động vật có hỗ trợ quét',
+              style: GoogleFonts.aBeeZee(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
@@ -45,10 +191,10 @@ class _TrackingImangeState extends State<TrackingImange> {
   SliverToBoxAdapter _buildListTracking() {
     return SliverToBoxAdapter(
       child: Container(
-        padding: const EdgeInsets.all(10),
-        height: MediaQuery.of(context).size.height,
+        padding: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
+        height: MediaQuery.of(context).size.height * 1.2,
         child: GridView.builder(
-          physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+          physics: const NeverScrollableScrollPhysics(),
           itemCount: _trackingImageList.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, // số cột trong lưới
@@ -72,11 +218,12 @@ class _TrackingImangeState extends State<TrackingImange> {
                     ]),
                 padding: const EdgeInsets.all(5),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Align(
                       alignment: Alignment.topCenter,
                       child: SizedBox(
-                        height: 90,
+                        height: 120,
                         width: 200,
                         child: ClipRRect(
                           borderRadius: const BorderRadius.only(
@@ -91,26 +238,7 @@ class _TrackingImangeState extends State<TrackingImange> {
                         ),
                       ),
                     ),
-                    Text(
-                      _trackingImageList[index]["name"],
-                      style: GoogleFonts.aBeeZee(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                    Text(
-                      '<${_trackingImageList[index]["nameEnglish"]}>',
-                      style: GoogleFonts.aBeeZee(
-                        fontSize: 14,
-                        fontWeight: FontWeight.normal,
-                        color: Colors.black,
-                        fontStyle: FontStyle.italic,
-                      ),
-                    ),
                     Container(
-                      height: 33,
-                      //width: 40,
                       decoration: const BoxDecoration(
                         color: Color.fromARGB(255, 190, 190, 190),
                         borderRadius: BorderRadius.only(
@@ -123,15 +251,14 @@ class _TrackingImangeState extends State<TrackingImange> {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 5, bottom: 5),
                         child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                          Image.asset(
-                            "assets/images/ar.png",
+                          Text(
+                            _trackingImageList[index]["name"],
+                            style: GoogleFonts.aBeeZee(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
                           ),
-                          const SizedBox(width: 10),
-                          const Icon(
-                            Icons.swipe_right,
-                            size: 20,
-                            color: OneColors.white,
-                          )
                         ]),
                       ),
                     ),

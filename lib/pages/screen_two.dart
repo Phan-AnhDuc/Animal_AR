@@ -15,9 +15,6 @@ class _ScreenKnownState extends State<ScreenKnown> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Lịch sử tiến hóa của sự sống"),
-      ),
       body: Container(
         decoration: const BoxDecoration(image: DecorationImage(image: AssetImage(OneImages.ar_background), fit: BoxFit.cover)),
         child: Scaffold(
@@ -36,10 +33,27 @@ class _ScreenKnownState extends State<ScreenKnown> {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
+            const SizedBox(height: 70),
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.white.withOpacity(0.7),
+              ),
+              padding: const EdgeInsets.all(8),
+              child: Text(
+                'Lịch sử tiến hóa của động vật',
+                style: GoogleFonts.aBeeZee(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white.withOpacity(0.8),
               ),
               child: Container(
                 padding: const EdgeInsets.all(12),
@@ -131,6 +145,12 @@ class _ScreenKnownState extends State<ScreenKnown> {
         ),
         itemCount: history.length,
       ),
+    );
+  }
+
+  SliverToBoxAdapter _buildVideoEvo(){
+    return SliverToBoxAdapter(
+      
     );
   }
 }

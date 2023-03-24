@@ -255,6 +255,7 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
           height: 250,
           child: CachedImage(
             imageUrl: arguments["imageUrl"],
+            fit: BoxFit.cover,
           ),
         )),
       ),
