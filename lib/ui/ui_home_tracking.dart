@@ -1,11 +1,9 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:animal_ar/const/ar_color.dart';
-import 'package:animal_ar/const/ar_constant.dart';
 import 'package:animal_ar/const/ar_image.dart';
 import 'package:animal_ar/const/cache/ar_cache_image.dart';
 import 'package:animal_ar/fireBase/fireBase_help.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';

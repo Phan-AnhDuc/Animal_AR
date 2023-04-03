@@ -1,7 +1,4 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
-
-import 'dart:ui';
-
 import 'package:animal_ar/const/ar_color.dart';
 import 'package:animal_ar/const/ar_image.dart';
 import 'package:animal_ar/const/cache/ar_cache_image.dart';
@@ -106,16 +103,6 @@ class _DetailAnimalScreenState extends State<DetailAnimalScreen> {
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             border: Border.all(color: OneColors.black, width: 0.3),
-            // gradient: const LinearGradient(
-            //   begin: Alignment.topLeft,
-            //   end: Alignment.bottomRight,
-            //   colors: [
-            //     Color(0xffDFFFD8),
-            //     Color.fromARGB(255, 255, 255, 255),
-            //     Color.fromARGB(255, 246, 217, 184),
-            //     Color.fromARGB(255, 247, 190, 190),
-            //   ],
-            // ),
             image: const DecorationImage(image: AssetImage(OneImages.ar_background), fit: BoxFit.cover),
             borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30))),
         child: Column(

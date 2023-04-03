@@ -3,6 +3,7 @@ import 'package:animal_ar/const/ar_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:timelines/timelines.dart';
+import 'package:video_player/video_player.dart';
 
 class ScreenKnown extends StatefulWidget {
   const ScreenKnown({super.key});
@@ -12,6 +13,25 @@ class ScreenKnown extends StatefulWidget {
 }
 
 class _ScreenKnownState extends State<ScreenKnown> {
+  VideoPlayerController? _controller;
+  bool _isPlaying = false;
+  double _volume = 0.5;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = VideoPlayerController.asset('assets/images/evoVideo.mp4')
+      ..initialize().then((_) {
+        setState(() {});
+      });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller?.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +41,7 @@ class _ScreenKnownState extends State<ScreenKnown> {
           backgroundColor: Colors.transparent,
           body: CustomScrollView(physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()), slivers: [
             _buildHeader(context),
+            _buildVideoEvo(),
           ]),
         ),
       ),
@@ -148,9 +169,79 @@ class _ScreenKnownState extends State<ScreenKnown> {
     );
   }
 
-  SliverToBoxAdapter _buildVideoEvo(){
+  SliverToBoxAdapter _buildVideoEvo() {
     return SliverToBoxAdapter(
-      
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.white.withOpacity(0.7),
+          ),
+          padding: const EdgeInsets.all(10),
+          child: _controller!.value.isInitialized
+              ? Column(
+                  children: [
+                    SizedBox(
+                      height: 205,
+                      child: Stack(
+                        children: [
+                          SizedBox(
+                            height: 205,
+                            width: MediaQuery.of(context).size.width,
+                            child: VideoPlayer(_controller!),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: VideoProgressIndicator(
+                              _controller!,
+                              allowScrubbing: true,
+                              colors: const VideoProgressColors(
+                                playedColor: Colors.blue,
+                                backgroundColor: Colors.grey,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Slider(
+                      value: _volume,
+                      onChanged: (value) {
+                        setState(() {
+                          _volume = value;
+                          _controller?.setVolume(value);
+                        });
+                      },
+                      min: 0.0,
+                      max: 1.0,
+                      divisions: 10,
+                      label: '${(_volume * 10).round()}',
+                    ),
+                    Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _isPlaying = !_isPlaying;
+                            _isPlaying ? _controller!.play() : _controller!.pause();
+                          });
+                        },
+                        child: Center(
+                          child: Container(
+                            decoration: BoxDecoration(color: const Color.fromARGB(255, 201, 201, 201), borderRadius: BorderRadius.circular(100)),
+                            child: Icon(
+                              _isPlaying ? Icons.pause : Icons.play_arrow,
+                              size: 48.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              : Container(),
+        ),
+      ),
     );
   }
 }
