@@ -4,7 +4,9 @@ import 'package:animal_ar/const/ar_color.dart';
 import 'package:animal_ar/const/ar_image.dart';
 import 'package:animal_ar/const/cache/ar_cache_image.dart';
 import 'package:animal_ar/fireBase/fireBase_help.dart';
+import 'package:animal_ar/ui/image_3D.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -202,7 +204,13 @@ class _TrackingImangeState extends State<TrackingImange> {
           itemBuilder: (context, index) {
             return InkWell(
               onTap: () {
-                launch(_trackingImageList[index]['URL']);
+                //  launch(_trackingImageList[index]['URL']);
+                Get.to(
+                    () => Image3D(
+                          urls: _trackingImageList[index]['URL'],
+                        ),
+                    curve: Curves.linear,
+                    transition: Transition.rightToLeft);
               },
               child: Container(
                 decoration: BoxDecoration(
