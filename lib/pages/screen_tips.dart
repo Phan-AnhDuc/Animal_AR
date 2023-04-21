@@ -35,32 +35,40 @@ class _ScreenTipsState extends State<ScreenTips> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Scrollbar(
-          child: CustomScrollView(slivers: <Widget>[
-            SliverPersistentHeader(
-              pinned: true,
-              floating: false,
-              delegate: SliverAppBarDelegate(
-                child: Container(
-                    decoration: BoxDecoration(
-                        image: const DecorationImage(image: AssetImage(OneImages.ar_background), fit: BoxFit.cover),
-                        borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
-                        boxShadow: [BoxShadow(offset: const Offset(0, 1), color: OneColors.textGreyDark.withOpacity(0.1), blurRadius: 15, spreadRadius: 1)]),
-                    child: AppBar(
-                      title: const Align(alignment: Alignment.center, child: SearchBar()),
-                      backgroundColor: Colors.transparent,
-                      shadowColor: Colors.transparent,
-                    )),
-                maxHeight: 68 + MediaQuery.of(context).padding.top,
-                minHeight: 68 + MediaQuery.of(context).padding.top,
-              ),
+          child: Stack(
+            children: [
+              CustomScrollView(physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()), slivers: [
+                SliverToBoxAdapter(child: _buildCardAnimal(context)),
+              ]),
+              _buildIconBack(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildIconBack() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 75, left: 15),
+      child: Align(
+        alignment: Alignment.topLeft,
+        child: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.grey[200],
             ),
-            SliverToBoxAdapter(
-                child: Stack(
-              children: [
-                _buildCardAnimal(context),
-              ],
-            )),
-          ]),
+            child: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+              size: 24,
+            ),
+          ),
         ),
       ),
     );
@@ -70,6 +78,7 @@ class _ScreenTipsState extends State<ScreenTips> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        const SizedBox(height: 50),
         SizedBox(
           height: 150,
           child: Image.asset(
@@ -85,7 +94,7 @@ class _ScreenTipsState extends State<ScreenTips> {
             ),
             child: Text(
               'CÓ THỂ EM CHƯA BIẾT ?',
-              style: GoogleFonts.aBeeZee(fontWeight: FontWeight.w900, color: OneColors.textBlack),
+              style: GoogleFonts.aBeeZee(fontWeight: FontWeight.w900, color: OneColors.textBlack, fontSize: 20),
             )),
         const SizedBox(height: 5),
         ListView.builder(

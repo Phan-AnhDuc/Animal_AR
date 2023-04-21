@@ -1,4 +1,9 @@
+import 'dart:async';
+
 import 'package:animal_ar/const/ar_color.dart';
+import 'package:animal_ar/const/ar_image.dart';
+import 'package:animal_ar/const/ar_loading.dart';
+import 'package:duration_button/duration_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,11 +21,17 @@ class _Image3DState extends State<Image3D> {
   final GlobalKey webViewKey = GlobalKey();
 
   InAppWebViewController? webViewController;
+  bool _delay = true;
 
   @override
   void initState() {
     super.initState();
     requestPermistion();
+    Timer(const Duration(seconds: 10), () {
+      setState(() {
+        _delay = false;
+      });
+    });
   }
 
   void requestPermistion() async {
@@ -54,10 +65,7 @@ class _Image3DState extends State<Image3D> {
               return PermissionRequestResponse(resources: resources, action: PermissionRequestResponseAction.GRANT);
             }),
       ),
-      Positioned(
-        top: 50,
-        child: _buildHuongDan(),
-      ),
+      _delay ? _buildHuongDan() : Container()
     ]));
   }
 
@@ -65,28 +73,31 @@ class _Image3DState extends State<Image3D> {
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      child: Column(
-        children: [
-          const SizedBox(height: 70),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: Container(
+      child: IgnorePointer(
+        child: Column(
+          children: [
+            //const SizedBox(height: 70),
+            Container(
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(1),
-                borderRadius: BorderRadius.circular(20),
+                image: const DecorationImage(image: AssetImage(OneImages.ar_background), fit: BoxFit.cover),
+                //borderRadius: BorderRadius.circular(20),
               ),
-              padding: const EdgeInsets.all(10),
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.only(top: 110, bottom: 10, left: 10, right: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     'Cách sử dụng quét hình ảnh',
                     style: GoogleFonts.aBeeZee(
-                      fontSize: 20,
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
                   ),
+                  const SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.only(top: 30, left: 10, right: 10, bottom: 10),
                     child: Row(
@@ -183,40 +194,29 @@ class _Image3DState extends State<Image3D> {
                       ],
                     ),
                   ),
+                  const SizedBox(height: 80),
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: 200,
+                        width: 200,
+                        child: OneLoadingAR.ar_loading,
+                      ),
+                      Text(
+                        'Vui lòng chờ trong giây lát ...',
+                        style: GoogleFonts.aBeeZee(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
-          ),
-          // const SizedBox(height: 170),
-          // IgnorePointer(
-          //   child: Container(
-          //     decoration: BoxDecoration(
-          //       gradient: const LinearGradient(
-          //         begin: Alignment.topLeft,
-          //         end: Alignment(0.8, 1),
-          //         colors: <Color>[
-          //           Color(0xffB2A4FF),
-          //           Color(0xff576CBC),
-          //           Color(0xffB0DAFF),
-          //           Color(0xffB9E9FC),
-          //           Color(0xffB4E4FF),
-          //         ], // Gradient from https://learnui.design/tools/gradient-generator.html
-          //         tileMode: TileMode.mirror,
-          //       ),
-          //       borderRadius: BorderRadius.circular(50),
-          //     ),
-          //     padding: const EdgeInsets.only(right: 50, left: 50, top: 20, bottom: 20),
-          //     child: Text(
-          //       'Quét ảnh',
-          //       style: GoogleFonts.aBeeZee(
-          //         fontSize: 35,
-          //         fontWeight: FontWeight.bold,
-          //         color: Colors.white,
-          //       ),
-          //     ),
-          //   ),
-          // )
-        ],
+          ],
+        ),
       ),
     );
   }

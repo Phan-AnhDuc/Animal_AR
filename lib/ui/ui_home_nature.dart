@@ -46,6 +46,7 @@ class _HomeNatureState extends State<HomeNature> {
   Widget _buildDrawer() {
     return Drawer(
       backgroundColor: Colors.transparent,
+      width: MediaQuery.of(context).size.width * 0.6,
       child: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(

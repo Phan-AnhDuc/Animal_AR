@@ -13,3 +13,14 @@ class OneLoading {
     fit: BoxFit.contain,
   );
 }
+
+class OneLoadingAR {
+  OneLoadingAR._();
+  static Widget ar_loading = Lottie.asset(
+    "assets/images/loadingAR.json",
+    width: 120,
+    height: 120,
+    repeat: true,
+    fit: BoxFit.contain,
+  );
+}
