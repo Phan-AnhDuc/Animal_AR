@@ -194,7 +194,7 @@ class _Image3DState extends State<Image3D> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 80),
+                  const SizedBox(height: 35),
                   Column(
                     children: [
                       SizedBox(
