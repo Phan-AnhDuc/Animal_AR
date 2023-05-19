@@ -27,7 +27,7 @@ class _Image3DState extends State<Image3D> {
   void initState() {
     super.initState();
     requestPermistion();
-    Timer(const Duration(seconds: 10), () {
+    Timer(const Duration(seconds: 15), () {
       setState(() {
         _delay = false;
       });
