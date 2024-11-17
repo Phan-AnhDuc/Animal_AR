@@ -1,3 +1,6 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:animal_ar/const/app_loading.dart';
 import 'package:animal_ar/const/ar_color.dart';
 import 'package:animal_ar/const/model/respone_mesage.dart';
 import 'package:animal_ar/const/model/response_detail_mesage.dart';
@@ -18,7 +21,9 @@ class DetailMail extends StatefulWidget {
 class _DetailMailState extends State<DetailMail> {
   @override
   void initState() {
-    _getApi();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _getApi();
+    });
     super.initState();
   }
 
@@ -73,6 +78,7 @@ class _DetailMailState extends State<DetailMail> {
 
   Future<void> _getApi() async {
     try {
+      AppLoading.showLoading(context);
       final response = await Dio().get(
         '${Endpoints.baseUrl}/messages',
         options: Options(
@@ -83,7 +89,6 @@ class _DetailMailState extends State<DetailMail> {
           },
         ),
       );
-
       final responseMail = ResponseMail.fromJson(response.data);
 
       if (responseMail.member != null) {
@@ -91,6 +96,8 @@ class _DetailMailState extends State<DetailMail> {
           _listResponseDetailMail = responseMail.member ?? [];
         });
       }
-    } catch (e) {}
+    } finally {
+      AppLoading.hideLoading(context);
+    }
   }
 }

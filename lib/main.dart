@@ -1,4 +1,4 @@
-import 'package:animal_ar/splash/splash_animal.dart';
+import 'package:animal_ar/mail/check_mail_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: SplashScreen(),
+      home: CheckMailScreen(),
     );
   }
 }
