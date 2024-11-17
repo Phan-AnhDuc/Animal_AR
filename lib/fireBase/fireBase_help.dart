@@ -1,40 +1,16 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-Future<List<Map<String, dynamic>>> getTipsData() async {
-  CollectionReference modeldata = FirebaseFirestore.instance.collection("tipsDB");
+Future<List<Map<String, dynamic>>> getListMail() async {
+  CollectionReference modeldata = FirebaseFirestore.instance.collection("mail");
   List<DocumentSnapshot> items = [];
-  List<Map<String, dynamic>> dataList = [];
+  List<Map<String, dynamic>> dataListMail = [];
 
   QuerySnapshot snapshot = await modeldata.get();
   for (var element in snapshot.docs) {
     var mapData = element.data() as Map<String, dynamic>;
-    dataList.add(mapData);
+    dataListMail.add(mapData);
   }
-  return dataList;
-}
-
-Future<List<Map<String, dynamic>>> getEvolutionData() async {
-  CollectionReference modeldata = FirebaseFirestore.instance.collection("evolutionNews");
-  List<DocumentSnapshot> items = [];
-  List<Map<String, dynamic>> dataListEvo = [];
-
-  QuerySnapshot snapshot = await modeldata.get();
-  for (var element in snapshot.docs) {
-    var mapData = element.data() as Map<String, dynamic>;
-    dataListEvo.add(mapData);
-  }
-  return dataListEvo;
-}
-
-Future<List<Map<String, dynamic>>> getTrackingImageData() async {
-  CollectionReference modeldata = FirebaseFirestore.instance.collection("trackingImageDB");
-  List<DocumentSnapshot> items = [];
-  List<Map<String, dynamic>> dataListImage = [];
-
-  QuerySnapshot snapshot = await modeldata.get();
-  for (var element in snapshot.docs) {
-    var mapData = element.data() as Map<String, dynamic>;
-    dataListImage.add(mapData);
-  }
-  return dataListImage;
+  return dataListMail;
 }

@@ -1,7 +1,7 @@
 import 'package:animal_ar/const/ar_color.dart';
 import 'package:animal_ar/const/ar_image.dart';
 import 'package:animal_ar/const/ar_theme.dart';
-import 'package:animal_ar/ui/ui_home_tabs.dart';
+import 'package:animal_ar/mail/check_mail_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -37,7 +37,6 @@ class _SplashScreenState extends State<SplashScreen> {
               body: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(width: MediaQuery.of(context).size.width * 0.6, child: Image.asset(OneImages.ar_logo)),
                   SizedBox(
                     height: 120,
                     width: 120,
@@ -46,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       onLoaded: (p0) {
                         Future.delayed(const Duration(seconds: 5), (() {
                           setState(() {
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeTabs()));
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const CheckMailScreen()));
                           });
                         }));
                       },
